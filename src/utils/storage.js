@@ -5,7 +5,7 @@ const defaultData = {
     heroHeadline: "Taking your business to new heights",
     heroSubheadline: "Altura Marketing is a growth-focused marketing studio specializing in paid advertising and brand design. We help brands turn attention into measurable results through intentional creative and data-driven execution.",
     heroCTAText: "Let's Chat",
-    heroImage: "/assets/Images/Branding Photoshoot/walking-home-page.jpg",
+    heroImage: "/assets/Images/Branding Photoshoot/Hero_RotatingAltura.mp4",
     uspHeadline: "It's about understanding people... not just platforms.",
     uspBody: "We focus on uncovering what your audience actually cares about, then shaping creative and messaging that feels natural, emotional, and aligned with how they think and buy. When strategy leads, performance follows.",
     uspImage: "/assets/images/computer.jpg", // Placeholder - to be uploaded later

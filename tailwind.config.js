@@ -16,8 +16,9 @@ export default {
         'accent-light': '#E8D5B7',
       },
       fontFamily: {
-        display: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['Afacad', 'Georgia', 'serif'],
         body: ['DM Sans', 'sans-serif'],
+        subheading: ['Geologica', 'sans-serif'],
       },
     },
   },
