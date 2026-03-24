@@ -31,12 +31,22 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-12 py-5 transition-all duration-400 ${
-        scrolled ? 'bg-near-black/92 backdrop-blur-[12px]' : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-12 py-0"
     >
+      {/* Background overlay — solid color + blur, opacity masked top-to-bottom */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-400"
+        style={{
+          opacity: scrolled ? 1 : 0,
+          background: 'rgba(20,20,20,0.92)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+        }}
+      />
       {/* Logo */}
-      <Link to="/" className="flex items-center">
+      <Link to="/" className="relative z-10 flex items-center">
         {logoImage ? (
           <img src={logoImage} alt="Altura" className="w-[108px] h-[108px]" />
         ) : (
@@ -47,7 +57,7 @@ function Navbar() {
       </Link>
 
       {/* Nav Links */}
-      <ul className="flex items-center gap-9 list-none">
+      <ul className="relative z-10 flex items-center gap-9 list-none">
         <li>
           <Link to="/" className={getLinkClass('/')}>
             Home
