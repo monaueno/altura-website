@@ -12,41 +12,41 @@ function Hero() {
   if (!data) return null;
 
   return (
-    <section className="relative h-screen min-h-[640px] flex items-end px-12 pb-20 overflow-hidden">
+    <section className="relative h-screen min-h-[640px] flex items-center justify-end px-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-near-black overflow-hidden">
-        {data.heroImage ? (
-          data.heroImage.endsWith('.mp4') ? (
-            <video
-              src={data.heroImage}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover opacity-[0.55]"
-            />
-          ) : (
-            <img
-              src={data.heroImage}
-              alt="Hero background"
-              className="w-full h-full object-cover opacity-[0.55]"
-            />
-          )
-        ) : (
+        {data.heroVideoUrl ? (
+          <video
+            src={data.heroVideoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              console.error('Video failed to load from URL, showing fallback');
+              e.target.style.display = 'none';
+            }}
+          />
+        ) : null}
+        {!data.heroVideoUrl && data.heroImage ? (
+          <img
+            src={data.heroImage}
+            alt="Hero background"
+            className="w-full h-full object-cover"
+          />
+        ) : !data.heroVideoUrl && !data.heroImage ? (
           <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#2d2d2d] to-[#1a1208] flex items-center justify-center">
             <span className="text-white/10 text-[0.8rem] tracking-[0.2em] uppercase">
-              Hero background image
+              Hero background
             </span>
           </div>
-        )}
+        ) : null}
       </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-
       {/* Content */}
-      <div className="relative z-10 max-w-[600px] ml-auto">
-        <h1 className="font-display text-[50px] font-bold text-white leading-[105%] tracking-[0%] mb-5 uppercase">
+      <div className="relative z-10 w-[479px] flex flex-col">
+        <h1 className="font-display text-[50px] font-bold text-white leading-[105%] tracking-[0%] mb-5 uppercase w-[479px]">
           {data.heroHeadline.split('new heights').map((part, i, arr) => (
             i < arr.length - 1 ? (
               <span key={i}>
@@ -61,7 +61,7 @@ function Hero() {
         </p>
         <a
           href="#contact"
-          className="inline-block px-8 py-[14px] bg-[#272828] text-white font-body font-semibold text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-[#3a3a3a] hover:-translate-y-[1px]"
+          className="self-start px-6 py-3 bg-[#272828] text-white font-body font-semibold text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-[#3a3a3a] hover:-translate-y-[1px]"
         >
           {data.heroCTAText}
         </a>

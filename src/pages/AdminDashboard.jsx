@@ -25,6 +25,11 @@ function AdminDashboard() {
       flatData[key] = value;
     });
 
+    // Ensure heroVideoUrl exists
+    if (!flatData.heroVideoUrl) {
+      flatData.heroVideoUrl = '';
+    }
+
     // Flatten testimonials
     siteData.testimonials?.forEach((t, i) => {
       const num = i + 1;
@@ -65,10 +70,12 @@ function AdminDashboard() {
     // Update home data
     siteData.home = {
       ...siteData.home,
+      logoImage: formData['logoImage'] || siteData.home.logoImage,
       heroHeadline: formData['heroHeadline'] || siteData.home.heroHeadline,
       heroSubheadline: formData['heroSubheadline'] || siteData.home.heroSubheadline,
       heroCTAText: formData['heroCTAText'] || siteData.home.heroCTAText,
       heroImage: formData['heroImage'] || siteData.home.heroImage,
+      heroVideoUrl: formData['heroVideoUrl'] || siteData.home.heroVideoUrl || '',
       staticShowcaseHeadline: formData['staticShowcaseHeadline'] || siteData.home.staticShowcaseHeadline,
       staticShowcaseSubheading: formData['staticShowcaseSubheading'] || siteData.home.staticShowcaseSubheading,
     };
@@ -179,22 +186,77 @@ function AdminDashboard() {
 
               <div className="bg-white border border-near-black/[0.08] rounded-md p-7 mb-5">
                 <h3 className="text-[0.72rem] tracking-[0.15em] uppercase text-accent font-semibold mb-[18px] pb-3 border-b border-near-black/[0.06]">
-                  Background Image
+                  Logo
                 </h3>
                 <div className="relative border-2 border-dashed border-near-black/15 rounded p-7 text-center cursor-pointer transition-all hover:border-accent hover:bg-accent/[0.06] bg-cream">
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => handleImageUpload(e, 'heroImage')}
+                    onChange={(e) => handleImageUpload(e, 'logoImage')}
                     className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                   />
-                  <div className="text-[1.8rem] mb-2">📸</div>
-                  <div className="text-[0.85rem] text-mid-gray font-medium">Click to upload your hero photo</div>
-                  <div className="text-[0.75rem] text-near-black/40 mt-1">JPG, PNG or WebP recommended · Will fill the full screen</div>
+                  <div className="text-[1.8rem] mb-2">🏢</div>
+                  <div className="text-[0.85rem] text-mid-gray font-medium">Click to upload your logo</div>
+                  <div className="text-[0.75rem] text-near-black/40 mt-1">PNG with transparent background recommended</div>
                 </div>
-                {formData.heroImage && (
-                  <img src={formData.heroImage} alt="Hero preview" className="w-full max-h-[200px] object-cover rounded-[3px] mt-3" />
+                {formData.logoImage && (
+                  <img src={formData.logoImage} alt="Logo preview" className="max-h-[60px] object-contain mt-3" />
                 )}
+              </div>
+
+              <div className="bg-white border border-near-black/[0.08] rounded-md p-7 mb-5">
+                <h3 className="text-[0.72rem] tracking-[0.15em] uppercase text-accent font-semibold mb-[18px] pb-3 border-b border-near-black/[0.06]">
+                  Background Media
+                </h3>
+
+                {/* Video URL Option */}
+                <div className="mb-6">
+                  <label className="block text-[0.72rem] tracking-[0.1em] uppercase text-near-black/50 font-semibold mb-2">
+                    🎥 Video URL (Recommended for videos)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.heroVideoUrl || ''}
+                    onChange={(e) => handleInputChange('heroVideoUrl', e.target.value)}
+                    placeholder="https://your-cdn.com/hero-video.mp4"
+                    className="w-full px-[14px] py-[11px] border border-near-black/[0.12] rounded-[3px] font-body text-[0.92rem] text-near-black bg-cream outline-none transition-colors focus:border-accent"
+                  />
+                  <p className="text-[0.75rem] text-near-black/40 mt-2">
+                    Upload your video to Google Drive, Dropbox, Cloudflare, or any CDN, then paste the direct link here. MP4 format (H.264 codec) required for browser compatibility.
+                  </p>
+                </div>
+
+                {/* Divider */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex-1 h-px bg-near-black/10"></div>
+                  <span className="text-[0.7rem] text-near-black/40 uppercase tracking-wider">or</span>
+                  <div className="flex-1 h-px bg-near-black/10"></div>
+                </div>
+
+                {/* Image Upload Option */}
+                <div>
+                  <label className="block text-[0.72rem] tracking-[0.1em] uppercase text-near-black/50 font-semibold mb-2">
+                    📸 Upload Image
+                  </label>
+                  <div className="relative border-2 border-dashed border-near-black/15 rounded p-7 text-center cursor-pointer transition-all hover:border-accent hover:bg-accent/[0.06] bg-cream">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'heroImage')}
+                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                    />
+                    <div className="text-[1.8rem] mb-2">📸</div>
+                    <div className="text-[0.85rem] text-mid-gray font-medium">Click to upload a background image</div>
+                    <div className="text-[0.75rem] text-near-black/40 mt-1">JPG, PNG or WebP · Stored locally in browser</div>
+                  </div>
+                  {formData.heroImage && (
+                    <img src={formData.heroImage} alt="Hero preview" className="w-full max-h-[200px] object-cover rounded-[3px] mt-3" />
+                  )}
+                </div>
+
+                <p className="text-[0.75rem] text-accent mt-4 bg-accent/10 p-3 rounded">
+                  💡 <strong>Tip:</strong> If both are set, the video URL will be used. Clear the video URL field to use the uploaded image instead.
+                </p>
               </div>
 
               <div className="bg-white border border-near-black/[0.08] rounded-md p-7 mb-5">
