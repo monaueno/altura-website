@@ -33,10 +33,9 @@ function AdminDashboard() {
     // Flatten testimonials
     siteData.testimonials?.forEach((t, i) => {
       const num = i + 1;
-      flatData[`t${num}-company`] = t.company || '';
       flatData[`t${num}-quote`] = t.quote || '';
-      flatData[`t${num}-name`] = t.name || '';
-      flatData[`t${num}-title`] = t.titleCompany || '';
+      flatData[`t${num}-avatar`] = t.avatar || '';
+      flatData[`t${num}-logo`] = t.logo || '';
     });
 
     // Flatten services
@@ -85,10 +84,9 @@ function AdminDashboard() {
       const num = i + 1;
       return {
         ...t,
-        company: formData[`t${num}-company`] || t.company,
         quote: formData[`t${num}-quote`] || t.quote,
-        name: formData[`t${num}-name`] || t.name,
-        titleCompany: formData[`t${num}-title`] || t.titleCompany,
+        avatar: formData[`t${num}-avatar`] || t.avatar,
+        logo: formData[`t${num}-logo`] || t.logo,
       };
     });
 
@@ -305,10 +303,26 @@ function AdminDashboard() {
           {/* Testimonials Section */}
           {activeSection === 'testimonials' && (
             <div>
-              <h2 className="font-display text-[1.5rem] font-bold text-near-black mb-[6px]">Testimonials</h2>
-              <p className="text-[0.88rem] text-mid-gray mb-8 font-light">
-                Edit each client testimonial. Visitors can click arrows to browse between them.
-              </p>
+              <div className="flex items-end justify-between mb-[6px]">
+                <div>
+                  <h2 className="font-display text-[1.5rem] font-bold text-near-black">Testimonials</h2>
+                  <p className="text-[0.88rem] text-mid-gray mb-0 font-light">
+                    Edit each client testimonial. Visitors can click arrows to browse between them.
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    if (confirm('This will clear your current testimonials and reload defaults. Continue?')) {
+                      localStorage.removeItem('annalise_site_data');
+                      window.location.reload();
+                    }
+                  }}
+                  className="px-[14px] py-[8px] text-[0.7rem] font-body font-semibold tracking-[0.08em] uppercase rounded-[2px] cursor-pointer border border-near-black/20 transition-colors bg-transparent text-mid-gray hover:border-accent hover:text-accent"
+                >
+                  Reset All Data
+                </button>
+              </div>
+              <div className="mb-8"></div>
 
               <div className="bg-white border border-near-black/[0.08] rounded-md p-7 mb-5">
                 <h3 className="text-[0.72rem] tracking-[0.15em] uppercase text-accent font-semibold mb-[18px] pb-3 border-b border-near-black/[0.06]">
@@ -334,18 +348,6 @@ function AdminDashboard() {
                   <div key={num} className={(activeTab.testimonials || 1) === num ? 'block' : 'hidden'}>
                     <div className="mb-[18px]">
                       <label className="block text-[0.72rem] tracking-[0.1em] uppercase text-near-black/50 font-semibold mb-2">
-                        Company / Client Name
-                      </label>
-                      <input
-                        type="text"
-                        value={formData[`t${num}-company`] || ''}
-                        onChange={(e) => handleInputChange(`t${num}-company`, e.target.value)}
-                        placeholder="BoostedSafe"
-                        className="w-full px-[14px] py-[11px] border border-near-black/[0.12] rounded-[3px] font-body text-[0.92rem] text-near-black bg-cream outline-none transition-colors focus:border-accent"
-                      />
-                    </div>
-                    <div className="mb-[18px]">
-                      <label className="block text-[0.72rem] tracking-[0.1em] uppercase text-near-black/50 font-semibold mb-2">
                         Quote
                       </label>
                       <textarea
@@ -357,25 +359,34 @@ function AdminDashboard() {
                     </div>
                     <div className="mb-[18px]">
                       <label className="block text-[0.72rem] tracking-[0.1em] uppercase text-near-black/50 font-semibold mb-2">
-                        Person's Name
+                        Logo / Signature Image
                       </label>
-                      <input
-                        type="text"
-                        value={formData[`t${num}-name`] || ''}
-                        onChange={(e) => handleInputChange(`t${num}-name`, e.target.value)}
-                        placeholder="Alexis Miles"
-                        className="w-full px-[14px] py-[11px] border border-near-black/[0.12] rounded-[3px] font-body text-[0.92rem] text-near-black bg-cream outline-none transition-colors focus:border-accent"
-                      />
+                      <div className="relative border-2 border-dashed border-near-black/15 rounded p-5 text-center cursor-pointer transition-all hover:border-accent hover:bg-accent/[0.06] bg-cream">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => handleImageUpload(e, `t${num}-logo`)}
+                          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                        />
+                        <div className="text-[1.4rem] mb-2">✍️</div>
+                        <div className="text-[0.82rem] text-mid-gray font-medium">Upload logo or signature</div>
+                        <div className="text-[0.7rem] text-near-black/40 mt-1">PNG with transparent background recommended</div>
+                      </div>
+                      {formData[`t${num}-logo`] && (
+                        <div className="mt-3 p-3 bg-white border border-near-black/10 rounded">
+                          <img src={formData[`t${num}-logo`]} alt="Logo preview" className="max-h-[50px] object-contain mx-auto" />
+                        </div>
+                      )}
                     </div>
                     <div>
                       <label className="block text-[0.72rem] tracking-[0.1em] uppercase text-near-black/50 font-semibold mb-2">
-                        Person's Title
+                        Name & Title (text that appears below logo)
                       </label>
                       <input
                         type="text"
-                        value={formData[`t${num}-title`] || ''}
-                        onChange={(e) => handleInputChange(`t${num}-title`, e.target.value)}
-                        placeholder="Dir. of Content, BoostedSafe"
+                        value={formData[`t${num}-avatar`] || ''}
+                        onChange={(e) => handleInputChange(`t${num}-avatar`, e.target.value)}
+                        placeholder="Alacia Maloy, Dir. of Comms & Ops"
                         className="w-full px-[14px] py-[11px] border border-near-black/[0.12] rounded-[3px] font-body text-[0.92rem] text-near-black bg-cream outline-none transition-colors focus:border-accent"
                       />
                     </div>

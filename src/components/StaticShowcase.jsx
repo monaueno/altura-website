@@ -15,13 +15,10 @@ function StaticShowcase() {
     <section className="px-12 py-24 bg-cream">
       {/* Header */}
       <div className="text-center mb-14">
-        <p className="text-[0.72rem] tracking-[0.25em] uppercase text-accent font-medium mb-[14px]">
-          Work
-        </p>
-        <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-bold text-near-black leading-[1.2]">
+        <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-bold text-near-black leading-[1.2] uppercase">
           {data.staticShowcaseHeadline}
         </h2>
-        <p className="mt-[14px] text-mid-gray text-[0.95rem] leading-[1.7] max-w-[560px] mx-auto font-light">
+        <p className="mt-6 text-mid-gray text-[0.95rem] leading-[1.7] max-w-[560px] mx-auto font-light font-subheading">
           {data.staticShowcaseSubheading}
         </p>
       </div>

@@ -132,6 +132,11 @@ function Card({ testimonial, height, translateX, darkOverlay, zIndex, cardH, sca
   const titleFontSize = `${0.75 * scale}rem`;
   const padding = `${Math.round(36 * scale)}px`;
 
+  // Debug: log testimonial data
+  console.log('Testimonial data:', testimonial);
+  console.log('Logo:', testimonial.logo);
+  console.log('Avatar:', testimonial.avatar);
+
   return (
     <div
       className="absolute rounded-2xl overflow-hidden"
@@ -153,14 +158,23 @@ function Card({ testimonial, height, translateX, darkOverlay, zIndex, cardH, sca
           &ldquo;{testimonial.quote}&rdquo;
         </p>
 
-        {/* Author */}
-        <div className="flex flex-col gap-[2px]">
-          <span className="font-display font-bold text-near-black" style={{ fontSize: nameFontSize }}>
-            {testimonial.name}
-          </span>
-          <span className="tracking-[0.1em] uppercase text-black/45 font-medium" style={{ fontSize: titleFontSize }}>
-            {testimonial.titleCompany}
-          </span>
+        {/* Logo and Name */}
+        <div className="flex flex-col gap-[8px]">
+          {testimonial.logo && (
+            <div className="flex justify-start">
+              <img
+                src={testimonial.logo}
+                alt="signature"
+                className="max-h-[100px] object-contain"
+                style={{ maxHeight: `${100 * scale}px` }}
+              />
+            </div>
+          )}
+          {testimonial.avatar && (
+            <span className="text-near-black/70 font-medium" style={{ fontSize: titleFontSize }}>
+              {testimonial.avatar}
+            </span>
+          )}
         </div>
       </div>
       {/* Dark overlay */}
