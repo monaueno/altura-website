@@ -12,8 +12,9 @@ export default {
         'near-black': '#141414',
         'dark-gray': '#1E1E1E',
         'mid-gray': '#3A3A3A',
-        accent: '#C8A97E',
-        'accent-light': '#E8D5B7',
+        accent: '#A4BDE0',
+        'accent-light': '#C5D6ED',
+        'accent-dark': '#8DADD0',
       },
       fontFamily: {
         display: ['Afacad', 'Georgia', 'serif'],
