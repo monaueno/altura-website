@@ -24,7 +24,7 @@ function AdminLogin() {
       {/* Background glow */}
       <div className="absolute w-[600px] h-[600px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.12]"
         style={{
-          background: 'radial-gradient(circle, rgba(200,169,126,1), transparent 70%)'
+          background: 'radial-gradient(circle, rgba(164,189,224,1), transparent 70%)'
         }}
       ></div>
 

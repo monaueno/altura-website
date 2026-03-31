@@ -70,23 +70,18 @@ Nav links (right side):
 - **Body Text**: "I focus on uncovering what your audience actually cares about, then shaping creative and messaging that feels natural, emotional, and aligned with how they think and buy. When strategy leads, performance follows."
 - **CTA Button**: "See My Portfolio" → links to `/portfolio`
 
-### 3. Static Ad Showcase
+### 3. Video Ad Showcase
 - **Headline**: "See the Creative Strategy Come to Life"
 - **Subheading**: "These static ads are real examples of how insight, intention, and execution come together. Each piece is designed to speak to a specific audience, highlight what matters most, and make the message feel natural, not forced."
-- **Images**: Pull from `/public/assets/portfolio/` — display as a grid or horizontal scroll of static ad images
+- **Images**: Pull from `/public/assets/portfolio/videos` — display as a grid or horizontal scroll of video ad images
 
-### 4. Video Showcase
-- **Subheading**: "Sometimes the UGC comes back less than ideal. Sometimes all you have are still images from a recent shoot. This portfolio highlights how creative strategy and thoughtful editing can transform what you have into video ads that actually work."
-- **Headline**: TBD — leave as placeholder for now
-- **Videos**: TBD — build the section UI with placeholder video thumbnails. Annalise will supply actual video files which go in `/public/assets/videos/`
-
-### 5. Testimonials
+### 4. Testimonials
 - Sliding carousel of testimonial cards
 - Each card: quote, name, title/company, optional avatar image
 - Use placeholder testimonials for now — Annalise will supply real ones via admin panel
 - Carousel should auto-scroll and be manually swipeable/clickable
 
-### 6. Services Preview
+### 5. Services Preview
 - **Intro text**: "Altura Marketing offers strategic marketing support for brands that want clarity, stronger creative, and measurable growth."
 - Five services, each with a number, title, description, and "Learn More" CTA linking to `/services`:
 

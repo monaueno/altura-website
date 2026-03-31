@@ -15,12 +15,9 @@ function ServicesPreview() {
   };
 
   return (
-    <section className="px-12 py-24 bg-cream-dark grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
+    <section className="px-12 py-24 bg-dark-white grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
       {/* Left Side - Text */}
       <div>
-        <p className="text-[0.72rem] tracking-[0.25em] uppercase text-accent font-medium mb-5">
-          What We Offer
-        </p>
         <h2 className="font-display text-[clamp(1.6rem,2.5vw,2.2rem)] font-bold text-near-black leading-[1.25] mb-5">
           Strategic Marketing Support for Growing Brands
         </h2>
@@ -29,7 +26,7 @@ function ServicesPreview() {
         </p>
         <a
           href="#contact"
-          className="inline-block px-8 py-[14px] bg-accent text-near-black font-body font-semibold text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-accent-light hover:-translate-y-[1px]"
+          className="inline-block px-8 py-[14px] bg-black text-white font-body font-semibold text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-mid-gray hover:-translate-y-[1px]"
         >
           Hire Us
         </a>
@@ -57,12 +54,12 @@ function ServicesPreview() {
                 openIndex === index ? 'max-h-[200px] pb-5' : 'max-h-0'
               }`}
             >
-              <p className="text-[0.9rem] text-mid-gray leading-[1.7] font-light">
+              <p className="text-[0.9rem] text-mid-gray leading-[1.7] font-light mb-6">
                 {service.description}
               </p>
               <a
-                href="/services"
-                className="inline-block mt-3 text-[0.75rem] tracking-[0.12em] uppercase font-semibold text-near-black border-b border-current pb-[1px] transition-colors hover:text-accent"
+                href="#contact"
+                className="inline-block px-2r py-[8px] bg-cream text-near-black font-body font-semibold text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-mid-gray hover:-translate-y-[1px]"
               >
                 Learn More
               </a>
