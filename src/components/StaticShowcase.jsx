@@ -40,7 +40,7 @@ function StaticShowcase() {
 
   return (
     <>
-      <section className="px-12 py-24 bg-cream">
+      <section className="px-12 py-24 bg-figma-gray">
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-bold text-near-black leading-[1.2] uppercase">
