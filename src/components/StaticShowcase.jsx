@@ -56,8 +56,8 @@ function StaticShowcase() {
           {videos.map((video, index) => (
             <div
               key={index}
-              className="bg-dark-gray rounded overflow-hidden relative cursor-pointer group"
-              style={{ width: '240px', height: '427px' }}
+              className="bg-dark-gray rounded overflow-hidden relative cursor-pointer group transition-transform duration-300 hover:scale-105"
+              style={{ width: '350px', height: '460px' }}
               onClick={() => handlePlayVideo(video)}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
@@ -74,7 +74,7 @@ function StaticShowcase() {
               />
 
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-300" />
 
               {/* Play Button */}
               <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">

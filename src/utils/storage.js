@@ -113,7 +113,7 @@ const defaultData = {
   videos: [
     {
       id: "1",
-      url: "/assets/Porfolio/Videos/SBS_With&Without_Video_Feed_V2.mp4",
+      url: "/assets/Porfolio/Videos/SBS_WithAndWithout_Video_Feed_V2.mp4",
       title: "SBS With & Without Video Feed",
       thumbnail: ""
     },
@@ -125,7 +125,7 @@ const defaultData = {
     },
     {
       id: "3",
-      url: "/assets/Porfolio/Videos/Ekko_CinematicStorytelling_V1A_TG - Feed.mp4",
+      url: "/assets/Porfolio/Videos/Ekko_CinematicStorytelling_V1A_TG%20-%20Feed.mp4",
       title: "Ekko Cinematic Storytelling",
       thumbnail: ""
     }
