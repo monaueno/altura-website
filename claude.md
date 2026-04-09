@@ -62,9 +62,16 @@ The navbar background is a **solid block** (no gradient, no blur mask) at `rgba(
 ### Page Heroes — Required on Every Public Page
 Because the navbar fade depends on a dark hero band sitting underneath it, **every public page must open with a dark hero/header section** and register it via `NavbarContext`. Without this, the transparent navbar would float over light content and become unreadable.
 
-Conventions:
-- **Home** — full-bleed hero (100vh), as already built.
-- **Inner pages** (Portfolio, Services, About, Blog index, Blog post, Portfolio detail) — ~60vh dark hero band with a display-serif title and a one-line subhead. May include a small accent (thin gold rule, or section number like "01 — Portfolio").
+**Hero heights vary per page** — the `NavbarContext` reads each hero's actual `getBoundingClientRect()`, so the fade adapts automatically. Vary heights intentionally to create pacing across the site:
+
+- **Home** — full-bleed (100vh). It's the front door and deserves the biggest moment.
+- **Portfolio detail / Blog post** — taller (70–80vh). The cover image is part of the storytelling.
+- **About** — medium (~60vh). Personal but not loud.
+- **Services / Portfolio index / Blog index** — shorter (45–55vh). Users came to scan; get them to content faster.
+- **Minimum: ~40vh.** Below that the fade window is too short and the navbar snaps from transparent to solid abruptly.
+
+**Typographic system stays constant even when heights vary** — same display serif for the title, same subhead treatment, same vertical rhythm. Consistent type makes varied heights read as intentional pacing rather than inconsistency.
+
 - **Detail pages** (`/portfolio/:slug`, `/blog/:slug`) — hero uses the project/post cover image with the title (and date for blog posts) on top.
 - Every page hero must be registered with `NavbarContext` on mount so the navbar fade lines up with the actual hero, not a viewport-height guess.
 
