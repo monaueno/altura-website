@@ -54,6 +54,23 @@ Nav links (right side):
 - Blog
 - **Let's Chat** (styled as a CTA button, links to contact form)
 
+### Navbar Background Behavior
+The navbar background is a **solid block** (no gradient, no blur mask) at `rgba(13,13,13,X)` where `X` fades from `0` → `~0.55` based on scroll position. The block fades in over the back half of the current page's hero section, so the navbar starts fully transparent on top of the hero and is fully visible by the time the user scrolls into the content below.
+
+**Implementation:** A `NavbarContext` lets each page register its hero element ref on mount. The `Navbar` reads the hero's `getBoundingClientRect()` and computes opacity from scroll progress through the back half of that element. Pages that do not register a hero get a solid navbar by default (safe for readability).
+
+### Page Heroes — Required on Every Public Page
+Because the navbar fade depends on a dark hero band sitting underneath it, **every public page must open with a dark hero/header section** and register it via `NavbarContext`. Without this, the transparent navbar would float over light content and become unreadable.
+
+Conventions:
+- **Home** — full-bleed hero (100vh), as already built.
+- **Inner pages** (Portfolio, Services, About, Blog index, Blog post, Portfolio detail) — ~60vh dark hero band with a display-serif title and a one-line subhead. May include a small accent (thin gold rule, or section number like "01 — Portfolio").
+- **Detail pages** (`/portfolio/:slug`, `/blog/:slug`) — hero uses the project/post cover image with the title (and date for blog posts) on top.
+- Every page hero must be registered with `NavbarContext` on mount so the navbar fade lines up with the actual hero, not a viewport-height guess.
+
+### Route-Change Scroll Reset
+On every route change, scroll position must reset to top — otherwise a fresh page navigation would land mid-faded with the navbar in an inconsistent state.
+
 ---
 
 ## Homepage Sections (Build in This Order)
