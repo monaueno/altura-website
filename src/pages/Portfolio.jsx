@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getData } from '../utils/storage';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -7,6 +6,7 @@ import Footer from '../components/Footer';
 function Portfolio() {
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [heroData, setHeroData] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const siteData = getData();
@@ -19,20 +19,48 @@ function Portfolio() {
     });
   }, []);
 
+  const isFirst = currentIndex === 0;
+  const isLast = currentIndex === portfolioItems.length - 1;
+
+  const handlePrev = () => {
+    if (!isFirst) setCurrentIndex((prev) => prev - 1);
+  };
+
+  const handleNext = () => {
+    if (!isLast) setCurrentIndex((prev) => prev + 1);
+  };
+
+  if (portfolioItems.length === 0) {
+    return (
+      <div className="min-h-screen bg-cream">
+        <Navbar />
+        <div className="flex items-center justify-center h-[60vh]">
+          <p className="text-mid-gray text-[1.1rem] font-subheading">
+            No portfolio items yet. Add some from the admin dashboard!
+          </p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Only show cards that haven't been viewed yet (current + upcoming)
+  const remaining = portfolioItems.length - currentIndex;
+  const CARD_H = 500;
+
   return (
     <div className="min-h-screen bg-cream">
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Small Hero Section */}
       <section
-        className="px-12 py-12 bg-near-black relative h-[80vh] min-h-[320px] flex items-center justify-end overflow-hidden"
+        className="px-12 py-16 bg-near-black relative overflow-hidden"
         style={{
           backgroundImage: heroData?.backgroundImage ? `url(${heroData.backgroundImage})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        {/* Dark overlay if background image exists */}
         {heroData?.backgroundImage && (
           <div className="absolute inset-0 bg-near-black/60" />
         )}
@@ -42,73 +70,98 @@ function Portfolio() {
             <img
               src={heroData.logo}
               alt="Brand logo"
-              className="max-h-[120px] object-contain mx-auto mb-8"
+              className="max-h-[80px] object-contain mx-auto mb-4"
             />
           )}
-          <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-bold text-white mb-6 leading-[1.1]">
+          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-3 leading-[1.1]">
             {heroData?.title || 'Our Work'}
           </h1>
-          <p className="text-white/70 text-[1.1rem] font-subheading max-w-2xl mx-auto">
-            {heroData?.subtitle || 'Strategic creative that drives results. Every project is built on insight, intention, and execution.'}
+          <p className="text-white/70 text-[1rem] font-subheading max-w-2xl mx-auto">
+            {heroData?.subtitle || 'Strategic creative that drives results.'}
           </p>
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="px-12 py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {portfolioItems.map((item) => (
-              <Link
-                key={item.id}
-                to={`/portfolio/${item.slug}`}
-                className="group cursor-pointer"
-              >
-                {/* Image */}
-                <div className="aspect-[4/5] bg-dark-gray rounded overflow-hidden mb-5 relative">
-                  {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#3d3d3d] flex items-center justify-center">
-                      <span className="text-white/20 text-[0.7rem] tracking-[0.2em] uppercase">
-                        {item.title}
-                      </span>
-                    </div>
-                  )}
+      {/* Full Screen Portfolio Section */}
+      <section className="relative bg-cream min-h-[calc(100vh-200px)] flex items-center justify-center overflow-hidden">
+        {/* Current Portfolio Item */}
+        <div className="w-full h-full absolute inset-0 transition-opacity duration-500">
+          <PortfolioSlide item={portfolioItems[currentIndex]} />
+        </div>
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-near-black/0 group-hover:bg-near-black/20 transition-all duration-300" />
-                </div>
+        {/* Navigation Arrows */}
+        <div className="absolute bottom-12 right-12 flex gap-4 z-20">
+          <button
+            onClick={handlePrev}
+            disabled={isFirst}
+            className={`w-14 h-14 border-2 rounded-full cursor-pointer flex items-center justify-center transition-all ${
+              isFirst
+                ? 'border-white/20 text-white/30 cursor-default bg-near-black/20'
+                : 'border-white/60 bg-near-black/40 text-white hover:border-accent hover:bg-accent backdrop-blur-sm'
+            }`}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={isLast}
+            className={`w-14 h-14 border-2 rounded-full cursor-pointer flex items-center justify-center transition-all ${
+              isLast
+                ? 'border-white/20 text-white/30 cursor-default bg-near-black/20'
+                : 'border-white/60 bg-near-black/40 text-white hover:border-accent hover:bg-accent backdrop-blur-sm'
+            }`}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
 
-                {/* Text */}
-                <div>
-                  <h3 className="font-display text-[1.5rem] font-bold text-near-black mb-2 group-hover:text-accent transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-mid-gray text-[0.95rem] leading-[1.6] font-light">
-                    {item.shortDescription}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Empty State */}
-          {portfolioItems.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-mid-gray text-[1.1rem] font-subheading">
-                No portfolio items yet. Add some from the admin dashboard!
-              </p>
-            </div>
-          )}
+        {/* Progress Indicator */}
+        <div className="absolute bottom-12 left-12 text-white/80 font-subheading text-sm z-20">
+          <span className="font-bold">{currentIndex + 1}</span> / {portfolioItems.length}
         </div>
       </section>
 
       <Footer />
+    </div>
+  );
+}
+
+function PortfolioSlide({ item }) {
+  return (
+    <div className="w-full h-full relative">
+      {/* Background Image */}
+      {item.image ? (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${item.image})` }}
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#3d3d3d]" />
+      )}
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-near-black/40" />
+
+      {/* Content */}
+      <div className="absolute inset-0 flex items-end px-16 py-16 z-10">
+        <div className="max-w-3xl">
+          <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-white mb-4 leading-[1.1]">
+            {item.title}
+          </h2>
+          <p className="text-white/90 text-[1.3rem] font-subheading leading-[1.6] mb-6">
+            {item.shortDescription}
+          </p>
+          {item.tagline && (
+            <p className="text-accent text-[1.1rem] font-display italic">
+              "{item.tagline}"
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
