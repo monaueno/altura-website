@@ -19,6 +19,7 @@ export default {
         accent: '#A4BDE0',
         'accent-light': '#C5D6ED',
         'accent-dark': '#8DADD0',
+        'blue-dark': '#5A739E',
       },
       fontFamily: {
         display: ['Afacad', 'Georgia', 'serif'],

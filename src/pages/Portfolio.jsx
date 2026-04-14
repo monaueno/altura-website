@@ -54,7 +54,7 @@ function Portfolio() {
 
       {/* Small Hero Section */}
       <section
-        className="px-12 min-h-[50vh] flex items-center bg-portfolio-cream relative overflow-hidden"
+        className="px-12 min-h-[60vh] flex items-center bg-portfolio-cream relative overflow-hidden"
       >
 
         <div className="max-w-7xl text-left flex flex-col justify-center relative z-10">
@@ -65,10 +65,10 @@ function Portfolio() {
               className="max-h-[80px] object-contain mb-4"
             />
           )}
-          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-near-black mb-3 leading-[1.1]">
+          <h1 className="font-display text-[clamp(3rem,10vw,3rem)] font-bold text-near-black mb-3 leading-[1.1]">
             {heroData?.title || 'Our Work'}
           </h1>
-          <p className="text-accent text-[1rem] font-subheading italic max-w-2xl">
+          <p className="text-blue-dark text-[1.5rem] font-subheading italic max-w-2xl">
             {heroData?.subtitle || 'Strategic creative that drives results.'}
           </p>
         </div>
