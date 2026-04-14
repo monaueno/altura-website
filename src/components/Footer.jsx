@@ -2,12 +2,12 @@ function Footer() {
   return (
     <footer className="bg-near-black px-12 py-[100px] relative overflow-hidden">
       {/* Large logo overlay — text left, logomark right, right edge at ~50% */}
-      <div className="absolute top-0 bottom-0 flex items-center gap-6 pointer-events-none" style={{ left: '8%' }}>
+      <div className="absolute top-0 bottom-0 flex items-center gap-6 pointer-events-none" style={{ left: '4%' }}>
         <div className="flex flex-col items-center">
-          <span className="font-display text-[3.5rem] font-bold text-white tracking-[0.12em] uppercase leading-none">
+          <span className="font-display text-[3.5rem] font-bold text-white tracking-[0.02em] uppercase leading-none">
             Altura
           </span>
-          <span className="font-display text-[1.5rem] font-bold text-white tracking-[0.25em] uppercase leading-tight">
+          <span className="font-display text-[1.5rem] font-bold text-white tracking-[0.2em] uppercase leading-tight">
             Marketing
           </span>
         </div>
@@ -24,12 +24,12 @@ function Footer() {
         <div className="flex gap-20">
           {/* Connect */}
           <div>
-            <h4 className="text-[0.65rem] tracking-[0.2em] uppercase text-accent font-semibold mb-3">
+            <h4 className="text-[1rem] tracking-[0.2em] uppercase text-white font-display mb-1">
               Connect
             </h4>
             <a
               href="mailto:annalise@alturamarketing.co"
-              className="block text-[0.85rem] text-white/60 transition-colors hover:text-white leading-[1.9]"
+              className="block text-[0.85rem] text-white transition-colors hover:text-white leading-[1.9]"
             >
               annalise@alturamarketing.co
             </a>
@@ -37,8 +37,8 @@ function Footer() {
 
           {/* Socials */}
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              <h4 className="text-[0.65rem] tracking-[0.2em] uppercase text-accent font-semibold">
+            <div className="flex items-center gap-3 mb-1">
+              <h4 className="text-[1rem] tracking-[0.2em] uppercase text-white font-display">
                 Socials
               </h4>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
@@ -59,7 +59,7 @@ function Footer() {
               href="https://alturamarketing.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-[0.85rem] text-white/60 transition-colors hover:text-white leading-[1.9]"
+              className="block text-[0.85rem] text-white transition-colors hover:text-white leading-[1.9]"
             >
               alturamarketing.co
             </a>
@@ -69,9 +69,9 @@ function Footer() {
         {/* Hire Us CTA */}
         <a
           href="#contact"
-          className="inline-block px-8 py-[14px] bg-accent text-near-black font-body font-semibold text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-accent-light hover:-translate-y-[1px]"
+          className="inline-block px-8 py-[14px] bg-white text-near-black font-body font-display text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-accent-light hover:-translate-y-[1px]"
         >
-          Hire Us
+          Hire Us!
         </a>
       </div>
 

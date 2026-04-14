@@ -45,6 +45,12 @@ function AdminDashboard() {
       flatData[`s${num}-body`] = s.description || '';
     });
 
+    // Flatten videos
+    siteData.videos?.forEach((v, i) => {
+      const num = i + 1;
+      flatData[`v${num}-thumbnail`] = v.thumbnail || '';
+    });
+
     setFormData(flatData);
   }, [navigate]);
 
@@ -98,6 +104,15 @@ function AdminDashboard() {
         ...s,
         title: formData[`s${num}-title`] || s.title,
         description: formData[`s${num}-body`] || s.description,
+      };
+    });
+
+    // Update videos
+    siteData.videos = siteData.videos.map((v, i) => {
+      const num = i + 1;
+      return {
+        ...v,
+        thumbnail: formData[`v${num}-thumbnail`] || v.thumbnail,
       };
     });
 
@@ -178,31 +193,12 @@ function AdminDashboard() {
             </p>
           </div>
           {[
-            { id: 'hero', label: 'Hero Section', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            )},
-            { id: 'testimonials', label: 'Testimonials', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-              </svg>
-            )},
-            { id: 'portfolio', label: 'Portfolio', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            )},
-            { id: 'services', label: 'Services', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-              </svg>
-            )},
-            { id: 'footer', label: 'Footer', icon: (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            )},
+            { id: 'hero', icon: '🖼', label: 'Hero Section' },
+            { id: 'testimonials', icon: '💬', label: 'Testimonials' },
+            { id: 'portfolio', icon: '🎨', label: 'Portfolio' },
+            { id: 'videos', icon: '🎬', label: 'Videos' },
+            { id: 'services', icon: '📋', label: 'Services' },
+            { id: 'footer', icon: '📌', label: 'Footer' },
           ].map(section => (
             <button
               key={section.id}
@@ -591,6 +587,61 @@ function AdminDashboard() {
                         className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none resize-y min-h-[100px] leading-relaxed transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]"
                       />
                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Videos Section */}
+          {activeSection === 'videos' && (
+            <div>
+              <h2 className="font-display text-[1.5rem] font-bold text-near-black mb-[6px]">Videos</h2>
+              <p className="text-[0.88rem] text-mid-gray mb-8 font-light">
+                Upload custom cover photos (thumbnails) for your video showcase. These images appear before the user clicks play.
+              </p>
+
+              <div className="bg-white border border-near-black/[0.08] rounded-md p-7 mb-5">
+                <h3 className="text-[0.72rem] tracking-[0.15em] uppercase text-accent font-semibold mb-[18px] pb-3 border-b border-near-black/[0.06]">
+                  Video Thumbnails
+                </h3>
+                <div className="flex gap-2 mb-5 flex-wrap">
+                  {[1, 2, 3].map(num => (
+                    <button
+                      key={num}
+                      onClick={() => switchTab('videos', num)}
+                      className={`px-[18px] py-2 border rounded-[20px] bg-transparent font-body text-[0.78rem] font-semibold cursor-pointer transition-all ${
+                        (activeTab.videos || 1) === num
+                          ? 'bg-accent text-near-black border-accent'
+                          : 'border-near-black/15 text-mid-gray hover:border-accent'
+                      }`}
+                    >
+                      Video {num}
+                    </button>
+                  ))}
+                </div>
+
+                {[1, 2, 3].map(num => (
+                  <div key={num} className={(activeTab.videos || 1) === num ? 'block' : 'hidden'}>
+                    <div className="relative border-2 border-dashed border-near-black/15 rounded p-7 text-center cursor-pointer transition-all hover:border-accent hover:bg-accent/[0.06] bg-cream">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e, `v${num}-thumbnail`)}
+                        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      />
+                      <div className="text-[1.8rem] mb-2">🎬</div>
+                      <div className="text-[0.85rem] text-mid-gray font-medium">Click to upload thumbnail for Video {num}</div>
+                      <div className="text-[0.75rem] text-near-black/40 mt-1">JPG or PNG · 9:16 aspect ratio recommended (e.g., 720x1280px)</div>
+                    </div>
+                    {formData[`v${num}-thumbnail`] && (
+                      <img
+                        src={formData[`v${num}-thumbnail`]}
+                        alt={`Video ${num} thumbnail`}
+                        className="w-full max-w-[240px] mx-auto mt-3 rounded-[3px] object-cover"
+                        style={{ aspectRatio: '9/16' }}
+                      />
+                    )}
                   </div>
                 ))}
               </div>

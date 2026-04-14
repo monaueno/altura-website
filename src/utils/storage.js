@@ -109,6 +109,26 @@ const defaultData = {
       logo: "public/assets/Home-Page-Defaults/BoostedSafe-Logo.png",
       avatar: "Skyler Baird, CEO"
     }
+  ],
+  videos: [
+    {
+      id: "1",
+      url: "/assets/Porfolio/Videos/SBS_WithAndWithout_Video_Feed_V2.mp4",
+      title: "SBS With & Without Video Feed",
+      thumbnail: ""
+    },
+    {
+      id: "2",
+      url: "/assets/Porfolio/Videos/YouArentAnAccountant_4x5.mp4",
+      title: "You Aren't An Accountant",
+      thumbnail: ""
+    },
+    {
+      id: "3",
+      url: "/assets/Porfolio/Videos/Ekko_CinematicStorytelling_V1A_TG%20-%20Feed.mp4",
+      title: "Ekko Cinematic Storytelling",
+      thumbnail: ""
+    }
   ]
 };
 
