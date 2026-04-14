@@ -54,28 +54,28 @@ function Portfolio() {
 
       {/* Small Hero Section */}
       <section
-        className="px-12 py-20 bg-portfolio-cream relative overflow-hidden"
+        className="px-12 min-h-[50vh] flex items-center bg-portfolio-cream relative overflow-hidden"
       >
 
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div className="max-w-7xl text-left flex flex-col justify-center relative z-10">
           {heroData?.logo && (
             <img
               src={heroData.logo}
               alt="Brand logo"
-              className="max-h-[80px] object-contain mx-auto mb-4"
+              className="max-h-[80px] object-contain mb-4"
             />
           )}
-          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-3 leading-[1.1]">
+          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-near-black mb-3 leading-[1.1]">
             {heroData?.title || 'Our Work'}
           </h1>
-          <p className="text-white/70 text-[1rem] font-subheading max-w-2xl mx-auto">
+          <p className="text-accent text-[1rem] font-subheading italic max-w-2xl">
             {heroData?.subtitle || 'Strategic creative that drives results.'}
           </p>
         </div>
       </section>
 
       {/* Full Screen Portfolio Section */}
-      <section className="relative bg-cream min-h-[calc(100vh-200px)] flex items-center justify-center overflow-hidden">
+      <section className="relative bg-portfolio-cream min-h-[calc(100vh-200px)] flex items-center justify-center overflow-hidden">
         {/* Current Portfolio Item */}
         <div className="w-full h-full absolute inset-0 transition-opacity duration-500">
           <PortfolioSlide item={portfolioItems[currentIndex]} />
@@ -128,15 +128,15 @@ function PortfolioSlide({ item }) {
       {/* Background Image */}
       {item.image ? (
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-portfolio-cream bg-portfolio-cream"
           style={{ backgroundImage: `url(${item.image})` }}
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2a2a2a] to-[#3d3d3d]" />
+        <div className="absolute inset-0 bg-portfolio-cream" />
       )}
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-near-black/40" />
+      <div className="absolute inset-0 bg-portfolio-cream" />
 
       {/* Content */}
       <div className="absolute inset-0 flex items-end px-16 py-16 z-10">
