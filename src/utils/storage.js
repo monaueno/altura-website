@@ -24,6 +24,10 @@ const defaultData = {
     title: "OUR WORK SPEAKS FOR ITSELF",
     subtitle: "(BUT A LITTLE CONTEXT NEVER HURTS.)",
   },
+  portfolioMountain: {
+    title: "CASE STUDIES",
+    subtitle: "Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.",
+  },
   services: [
     {
       id: "1",
@@ -61,7 +65,7 @@ const defaultData = {
       id: "1",
       slug: "salt-final-sale",
       title: "Salt Final Sale",
-      image: "/assets/portfolio/placeholder-1.jpg",
+      image: "/assets/Porfolio/Statics/Ziplock-Organizer.jpg",
       strategyBullets: [
         {
           title: "STRATEGIC PROMOTION",
