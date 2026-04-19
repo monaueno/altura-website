@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getData } from '../utils/storage';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -13,14 +14,12 @@ function Portfolio() {
     const siteData = getData();
     setPortfolioItems(siteData.portfolio || []);
     setHeroData(siteData.portfolioHero || {
-      title: 'Our Work',
-      subtitle: 'Strategic creative that drives results. Every project is built on insight, intention, and execution.',
-      backgroundImage: '',
-      logo: ''
+      title: 'OUR WORK SPEAKS FOR ITSELF.',
+      subtitle: '(But a little context never hurts.)',
     });
     setMountainData(siteData.portfolioMountain || {
       title: 'CASE STUDIES',
-      subtitle: 'Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.'
+      subtitle: 'Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.',
     });
   }, []);
 
@@ -49,84 +48,146 @@ function Portfolio() {
     );
   }
 
-  // Only show cards that haven't been viewed yet (current + upcoming)
-  const remaining = portfolioItems.length - currentIndex;
-  const CARD_H = 500;
-
   return (
     <div className="min-h-screen bg-portfolio-cream">
       <Navbar />
 
-      {/* Small Hero Section */}
-      <section
-        className="px-12 pt-40 min-h-[55vh] flex items-center bg-portfolio-cream relative overflow-hidden"
-      >
-
-        <div className="max-w-7xl text-left flex flex-col justify-center relative z-10">
-          {heroData?.logo && (
-            <img
-              src={heroData.logo}
-              alt="Brand logo"
-              className="max-h-[80px] object-contain mb-4"
-            />
-          )}
-          <h1 className="font-display text-[clamp(3rem,10vw,3rem)] font-bold text-near-black mb-1 leading-[1.1] tracking-[0.05em]">
-            {heroData?.title || 'Our Work'}
+      {/* Hero Section */}
+      <section className="px-12 pt-40 pb-12 bg-portfolio-cream">
+        <div className="max-w-[1300px] mx-auto">
+          <h1 className="font-display text-[50px] font-bold text-near-black leading-[1.05] tracking-[0.05em] uppercase">
+            {heroData?.title || 'OUR WORK SPEAKS FOR ITSELF.'}
           </h1>
-          <p className="text-blue-dark text-[1.5rem] font-subheading italic max-w-2xl">
-            {heroData?.subtitle || 'Strategic creative that drives results.'}
+          <p className="text-blue-dark text-[22px] font-subheading italic mt-2">
+            {heroData?.subtitle || '(But a little context never hurts.)'}
           </p>
         </div>
       </section>
 
       {/* Portfolio Card Section */}
       <section className="bg-portfolio-cream px-12 pb-16">
-        <PortfolioSlide item={portfolioItems[currentIndex]} />
+        <div className="max-w-[1300px] mx-auto">
+          <PortfolioSlide item={portfolioItems[currentIndex]} />
 
-        {/* Navigation Arrows */}
-        <div className="flex justify-end gap-4 mt-10 max-w-7xl">
-          <button
-            onClick={handlePrev}
-            disabled={isFirst}
-            className={`w-12 h-12 border-2 rounded-full cursor-pointer flex items-center justify-center transition-all ${
-              isFirst
-                ? 'border-mid-gray/20 text-mid-gray/30 cursor-default'
-                : 'border-near-black text-near-black hover:bg-near-black hover:text-white'
-            }`}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={isLast}
-            className={`w-12 h-12 border-2 rounded-full cursor-pointer flex items-center justify-center transition-all ${
-              isLast
-                ? 'border-mid-gray/20 text-mid-gray/30 cursor-default'
-                : 'border-near-black text-near-black hover:bg-near-black hover:text-white'
-            }`}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
+          {/* Navigation Arrows */}
+          <div className="flex justify-end gap-3 mt-8">
+            <button
+              onClick={handlePrev}
+              disabled={isFirst}
+              aria-label="Previous project"
+              className={`relative w-[47px] h-[47px] rounded-full border-2 transition-all select-none ${
+                isFirst
+                  ? 'border-mid-gray/20 text-mid-gray/30 cursor-default'
+                  : 'border-near-black text-near-black hover:bg-near-black hover:text-white cursor-pointer'
+              }`}
+            >
+              <svg
+                className="absolute inset-0 m-auto pointer-events-none"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button
+              onClick={handleNext}
+              disabled={isLast}
+              aria-label="Next project"
+              className={`relative w-[47px] h-[47px] rounded-full border-2 transition-all select-none ${
+                isLast
+                  ? 'border-mid-gray/20 text-mid-gray/30 cursor-default'
+                  : 'border-near-black text-near-black hover:bg-near-black hover:text-white cursor-pointer'
+              }`}
+            >
+              <svg
+                className="absolute inset-0 m-auto pointer-events-none"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Mountain Section */}
-      <section
-        className="min-h-[100vh] bg-cover bg-center relative flex items-center px-12"
-        style={{ backgroundImage: "url('/assets/Images/Mountains/background-mountain.jpg')"}}
-      >
-        <div className="absolute inset-0 bg-portfolio-cream/80" />
-        <div className="max-w-7xl flex flex-col justify-center relative z-10">
-          <h1 className="font-display text-[clamp(3rem,10vw,1rem)] font-bold text-near-black mb-3 leading-[1.1]">
-            {mountainData?.title || 'CASE STUDIES'}
-          </h1>
-          <p className="text-near-black text-[1.2rem] font-subheading max-w-2xl">
-            {mountainData?.subtitle || 'Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.'}
-          </p>
+      {/* Case Studies Section */}
+      <section className="relative overflow-hidden">
+        {/* Dark background with mountain image */}
+        <div className="absolute inset-0">
+          <img
+            src="/assets/Images/Mountains/background-mountain.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-near-black/80" />
+        </div>
+
+        <div className="relative z-10 py-24 px-12">
+          <div className="max-w-[1300px] mx-auto">
+            {/* Heading */}
+            <div className="text-center mb-12">
+              <h2 className="font-display text-[40px] font-bold text-white leading-[1.05] tracking-[0.05em] uppercase mb-4">
+                {mountainData?.title || 'CASE STUDIES'}
+              </h2>
+              <p className="font-subheading font-light text-[18px] text-white/80 max-w-[570px] mx-auto leading-[1.25]">
+                {mountainData?.subtitle || 'Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.'}
+              </p>
+            </div>
+
+            {/* Case Study Card */}
+            {portfolioItems.length > 0 && (
+              <Link
+                to={`/portfolio/${portfolioItems[0].slug}`}
+                className="block mx-auto max-w-[948px] h-[381px] rounded-[10px] overflow-hidden relative group"
+              >
+                <img
+                  src={portfolioItems[0].image}
+                  alt={portfolioItems[0].title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+
+                {/* Card content */}
+                <div className="absolute inset-0 flex flex-col items-center justify-end pb-8">
+                  <h3 className="font-display font-bold text-[40px] text-white leading-[1.1] uppercase text-center mb-4">
+                    Luxury Home Brand Case Study
+                  </h3>
+                  <span className="inline-block border-2 border-white rounded-full px-6 py-1 font-display font-bold text-[16px] text-white tracking-[0.05em] uppercase">
+                    Paid Advertising
+                  </span>
+                </div>
+              </Link>
+            )}
+
+            {/* Bottom CTA */}
+            <div className="text-center mt-20">
+              <p className="font-subheading font-light text-[18px] text-white/60 mb-2">
+                More impact in the works...
+              </p>
+              <h3 className="font-display font-bold text-[30px] text-white leading-[1.1] uppercase max-w-[400px] mx-auto mb-10">
+                Our next success story could be yours.
+              </h3>
+              <a
+                href="#contact"
+                className="inline-block bg-white text-near-black font-display font-bold text-[20px] tracking-[0.05em] uppercase px-6 py-3 hover:bg-accent-light transition-colors"
+              >
+                Hire Us!
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -137,90 +198,88 @@ function Portfolio() {
 
 function PortfolioSlide({ item }) {
   return (
-    <div className="max-w-7xl h-[650px]">
-      <div className="flex gap-28 h-full pl-10 pr-4">
-        {/* Left — Image */}
-        <div className="w-[45%] flex-shrink-0 h-full">
-          {item.image ? (
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-full object-cover rounded-sm"
-            />
-          ) : (
-            <div className="w-full h-full bg-mid-gray/10 rounded-sm" />
-          )}
-        </div>
+    <div className="flex gap-12 lg:gap-20">
+      {/* Left — Image */}
+      <div className="w-[36%] flex-shrink-0">
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full h-[656px] object-cover rounded-[8px]"
+          />
+        ) : (
+          <div className="w-full h-[656px] bg-mid-gray/10 rounded-[8px]" />
+        )}
+      </div>
 
-        {/* Right — Strategy + Performance */}
-        <div className="flex-1 flex flex-col justify-start" style={{ transform: 'scaleY(1.1)', transformOrigin: 'top' }}>
-          {/* AD STRATEGY */}
-          {item.strategyBullets && item.strategyBullets.length > 0 && (
-            <div>
-              <h3 className="font-display text-[1.5rem] font-bold text-near-black mb-6 tracking-[0.08em]">
-                AD STRATEGY
-              </h3>
-              <div className="space-y-5 ml-8">
-                {item.strategyBullets.map((bullet, i) => (
-                  <div key={i}>
-                    <p className="font-body text-[0.95rem] font-bold text-near-black leading-[1.4] tracking-[0.03em]">
-                      {bullet.title || bullet}
+      {/* Right — Strategy + Performance */}
+      <div className="flex-1 flex flex-col justify-start py-4">
+        {/* AD STRATEGY */}
+        {item.strategyBullets && item.strategyBullets.length > 0 && (
+          <div>
+            <h3 className="font-display text-[20px] font-bold text-near-black mb-6 tracking-[0.08em] uppercase">
+              Ad Strategy
+            </h3>
+            <div className="space-y-6 ml-6">
+              {item.strategyBullets.map((bullet, i) => (
+                <div key={i}>
+                  <p className="font-body text-[15px] font-bold text-near-black leading-[1.4] tracking-[0.02em]">
+                    {bullet.title || bullet}
+                  </p>
+                  {bullet.description && (
+                    <p className="font-body text-[15px] text-near-black/70 leading-[1.5] tracking-[0.02em]">
+                      {bullet.description}
                     </p>
-                    {bullet.description && (
-                      <p className="font-body text-[0.95rem] text-near-black/80 leading-[1.6] mt-0 tracking-[0.03em]">
-                        {bullet.description}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
+                  )}
+                </div>
+              ))}
             </div>
-          )}
+          </div>
+        )}
 
-          {/* PERFORMANCE */}
-          {item.metrics && item.metrics.length > 0 && (
-            <div className="mt-10">
-              <h3 className="font-display text-[1.5rem] font-bold text-near-black mb-6 tracking-[0.08em]">
-                PERFORMANCE
-              </h3>
-              <div className="flex gap-16 ml-8">
-                {item.metrics.map((metric, i) => (
-                  <div key={i} className="flex-1">
-                    {/* Metric pill */}
-                    <div className="inline-block border-2 border-near-black rounded-full px-6 py-2 mb-6">
-                      <span className="font-body text-[0.95rem] font-bold text-near-black tracking-[0.03em]">
-                        {metric.label}: {metric.value}
-                      </span>
-                    </div>
+        {/* PERFORMANCE */}
+        {item.metrics && item.metrics.length > 0 && (
+          <div className="mt-10">
+            <h3 className="font-display text-[20px] font-bold text-near-black mb-6 tracking-[0.08em] uppercase">
+              Performance
+            </h3>
+            <div className="flex gap-12 ml-6">
+              {item.metrics.map((metric, i) => (
+                <div key={i} className="flex-1">
+                  {/* Metric pill */}
+                  <div className="inline-block border-2 border-near-black rounded-full px-5 py-1.5 mb-5">
+                    <span className="font-body text-[15px] font-bold text-near-black tracking-[0.02em]">
+                      {metric.label}: {metric.value}
+                    </span>
+                  </div>
 
-                    <p className="font-body text-[0.85rem] font-normal text-near-black uppercase tracking-wide">
-                      {metric.industryLabel}
+                  <p className="font-body text-[13px] font-normal text-near-black uppercase tracking-wide">
+                    {metric.industryLabel}
+                  </p>
+                  {metric.industryContext && (
+                    <p className="font-body text-[13px] italic text-near-black/60 mb-4">
+                      {metric.industryContext}
                     </p>
-                    {metric.industryContext && (
-                      <p className="font-body text-[0.85rem] italic text-near-black/70 mb-5 tracking-[0.03em]">
-                        {metric.industryContext}
-                      </p>
-                    )}
+                  )}
 
-                    {/* Benchmarks */}
-                    <div className="space-y-0.5">
-                      {metric.benchmarks.map((b, j) => (
-                        <p
-                          key={j}
-                          className={`font-body text-[0.85rem] text-near-black/80 tracking-[0.03em] ${
-                            b.bold ? 'font-bold italic' : ''
-                          }`}
-                        >
-                          {b.level}: {b.range}
-                        </p>
-                      ))}
-                    </div>
+                  {/* Benchmarks */}
+                  <div className="space-y-0.5">
+                    {metric.benchmarks.map((b, j) => (
+                      <p
+                        key={j}
+                        className={`font-body text-[13px] text-near-black/70 ${
+                          b.bold ? 'font-bold italic text-near-black' : ''
+                        }`}
+                      >
+                        {b.level}: {b.range}
+                      </p>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
