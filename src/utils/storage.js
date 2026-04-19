@@ -20,6 +20,12 @@ const defaultData = {
     photo: "/assets/images/about-photo.jpg",
     bio: "Marketing strategist passionate about helping brands connect with their audiences through authentic storytelling and data-driven creative."
   },
+  portfolioHero: {
+    title: "Luxury Home Brand Case Study",
+    subtitle: "From inconsistent returns to a 5x+ scalable paid system",
+    backgroundImage: "/public/assets/Porfolio/Ad-Photos/salt-drawer.png",
+    logo: "/assets/Home-Page-Defaults/salt-logo.png"
+  },
   services: [
     {
       id: "1",
