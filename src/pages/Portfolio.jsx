@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 function Portfolio() {
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [heroData, setHeroData] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const siteData = getData();
@@ -14,8 +13,7 @@ function Portfolio() {
     setHeroData(siteData.portfolioHero || {
       title: 'Our Work',
       subtitle: 'Strategic creative that drives results. Every project is built on insight, intention, and execution.',
-      backgroundImage: '',
-      logo: ''
+      backgroundImage: ''
     });
   }, []);
 
@@ -52,32 +50,26 @@ function Portfolio() {
     <div className="min-h-screen bg-cream">
       <Navbar />
 
-      {/* Small Hero Section */}
+      {/* Hero Section */}
       <section
-        className="px-12 py-16 bg-near-black relative overflow-hidden"
+        className="px-12 py-12 bg-near-black relative h-[80vh] min-h-[320px] flex items-center justify-end overflow-hidden"
         style={{
           backgroundImage: heroData?.backgroundImage ? `url(${heroData.backgroundImage})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
+        {/* Dark overlay if background image exists */}
         {heroData?.backgroundImage && (
           <div className="absolute inset-0 bg-near-black/60" />
         )}
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          {heroData?.logo && (
-            <img
-              src={heroData.logo}
-              alt="Brand logo"
-              className="max-h-[80px] object-contain mx-auto mb-4"
-            />
-          )}
-          <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-3 leading-[1.1]">
+          <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-bold text-white mb-6 leading-[1.1]">
             {heroData?.title || 'Our Work'}
           </h1>
-          <p className="text-white/70 text-[1rem] font-subheading max-w-2xl mx-auto">
-            {heroData?.subtitle || 'Strategic creative that drives results.'}
+          <p className="text-white/70 text-[1.1rem] font-subheading max-w-2xl mx-auto">
+            {heroData?.subtitle || 'Strategic creative that drives results. Every project is built on insight, intention, and execution.'}
           </p>
         </div>
       </section>
