@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { getData } from '../utils/storage';
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [bgOpacity, setBgOpacity] = useState(0);
   const [logoImage, setLogoImage] = useState('');
   const location = useLocation();
 
@@ -13,13 +13,29 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
+    const MAX_OPACITY = 0.55;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
+      const vh = window.innerHeight;
+      const start = vh * 0.5; // begin fade-in at midway through hero
+      const end = vh * 0.95;  // fully visible near end of hero
+      const y = window.scrollY;
+
+      let progress = (y - start) / (end - start);
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+
+      setBgOpacity(progress * MAX_OPACITY);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [location.pathname]);
 
   const getLinkClass = (path) => {
     const isActive = location.pathname === path;
@@ -33,16 +49,11 @@ function Navbar() {
     <nav
       className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-12 py-0"
     >
-      {/* Background overlay — solid color + blur, opacity masked top-to-bottom */}
+      {/* Background overlay — solid block, opacity scales with scroll position */}
       <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-400"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          opacity: scrolled ? 1 : 0,
-          background: 'rgba(20,20,20,0.92)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+          backgroundColor: `rgba(13,13,13,${bgOpacity})`,
         }}
       />
       {/* Logo */}
