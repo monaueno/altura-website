@@ -21,9 +21,16 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Pages with light/cream backgrounds need dark navbar text
+  const darkTextPages = ['/portfolio', '/services', '/blog'];
+  const isDarkText = darkTextPages.includes(location.pathname);
+
   const getLinkClass = (path) => {
     const isActive = location.pathname === path;
-    const baseClass = "font-display text-white/85 text-[20px] leading-[150%] uppercase transition-colors hover:text-[#A4BDE0]";
+    const textColor = isDarkText
+      ? "text-near-black/85 hover:text-near-black"
+      : "text-white/85 hover:text-[#A4BDE0]";
+    const baseClass = `font-display ${textColor} text-[20px] leading-[150%] uppercase transition-colors`;
     const activeClass = "font-bold italic tracking-[0.05em]";
     const inactiveClass = "font-normal tracking-[0%]";
     return `${baseClass} ${isActive ? activeClass : inactiveClass}`;
@@ -38,7 +45,7 @@ function Navbar() {
         className="absolute inset-0 pointer-events-none transition-opacity duration-400"
         style={{
           opacity: scrolled ? 1 : 0,
-          background: 'rgba(20,20,20,0.92)',
+          background: isDarkText ? 'rgba(243,242,239,0.92)' : 'rgba(20,20,20,0.92)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
           maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
@@ -47,13 +54,15 @@ function Navbar() {
       />
       {/* Logo */}
       <Link to="/" className="relative z-10 flex items-center">
-        {logoImage ? (
-          <img src={logoImage} alt="Altura" className="w-[108px] h-[108px]" />
-        ) : (
-          <span className="font-display text-[1.4rem] font-bold text-white tracking-[0.04em]">
-            Annalise
-          </span>
-        )}
+        <img
+          src={isDarkText
+            ? '/assets/Images/altura-logo.png'
+            : (logoImage || '/assets/Images/altura-logo.png')
+          }
+          alt="Altura"
+          className="w-[108px] h-[108px]"
+          style={isDarkText ? {} : { filter: 'brightness(0) invert(1)' }}
+        />
       </Link>
 
       {/* Nav Links */}
@@ -86,7 +95,7 @@ function Navbar() {
         <li>
           <a
             href="#contact"
-            className="font-display bg-[#A4BDE0] text-white px-[22px] py-[10px] rounded-[2px] font-normal text-[20px] leading-[150%] tracking-[0%] uppercase transition-all hover:bg-[#8DADD0]"
+            className={`font-display ${isDarkText ? 'bg-blue-dark' : 'bg-[#A4BDE0]'} text-white px-[22px] py-[10px] rounded-[2px] font-normal text-[20px] leading-[150%] tracking-[0%] uppercase transition-all hover:bg-[#8DADD0]`}
           >
             Let's Chat
           </a>
