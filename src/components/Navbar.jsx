@@ -40,6 +40,10 @@ function Navbar() {
   const darkTextPages = ['/portfolio'];
   const isDarkText = darkTextPages.includes(location.pathname);
 
+  // Pages with light/cream backgrounds need dark navbar text
+  const darkTextPages = ['/portfolio', '/services', '/blog'];
+  const isDarkText = darkTextPages.includes(location.pathname);
+
   const getLinkClass = (path) => {
     const isActive = location.pathname === path;
     const textColor = isDarkText
@@ -104,7 +108,7 @@ function Navbar() {
         <li>
           <a
             href="#contact"
-            className="font-display bg-[#A4BDE0] text-white px-[22px] py-[10px] rounded-[2px] font-normal text-[20px] leading-[150%] tracking-[0%] uppercase transition-all hover:bg-[#8DADD0]"
+            className={`font-display ${isDarkText ? 'bg-blue-dark' : 'bg-[#A4BDE0]'} text-white px-[22px] py-[10px] rounded-[2px] font-normal text-[20px] leading-[150%] tracking-[0%] uppercase transition-all hover:bg-[#8DADD0]`}
           >
             Let's Chat
           </a>

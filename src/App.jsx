@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import Portfolio from './pages/Portfolio'
-import PortfolioDetail from './pages/PortfolioDetail'
+import About from './pages/About'
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 
@@ -13,7 +12,6 @@ function App() {
       <Route path="/portfolio/:slug" element={<PortfolioDetail />} />
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      {/* Other routes will be added later */}
     </Routes>
   )
 }
