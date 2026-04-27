@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         cream: '#F5EFE6',
+        'portfolio-cream': '#F3F2EF',
         'cream-dark': '#EDE4D6',
         'near-black': '#141414',
         'dark-gray': '#1E1E1E',
@@ -18,6 +19,7 @@ export default {
         accent: '#A4BDE0',
         'accent-light': '#C5D6ED',
         'accent-dark': '#8DADD0',
+        'blue-dark': '#5A739E',
       },
       fontFamily: {
         display: ['Afacad', 'Georgia', 'serif'],
