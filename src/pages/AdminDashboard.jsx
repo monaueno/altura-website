@@ -51,6 +51,12 @@ function AdminDashboard() {
       flatData[`v${num}-thumbnail`] = v.thumbnail || '';
     });
 
+    // Flatten portfolio hero
+    flatData['portfolioHeroTitle'] = siteData.portfolioHero?.title || '';
+    flatData['portfolioHeroSubtitle'] = siteData.portfolioHero?.subtitle || '';
+    flatData['portfolioHeroImage'] = siteData.portfolioHero?.backgroundImage || '';
+    flatData['portfolioHeroLogo'] = siteData.portfolioHero?.logo || '';
+
     setFormData(flatData);
   }, [navigate]);
 
@@ -115,6 +121,14 @@ function AdminDashboard() {
         thumbnail: formData[`v${num}-thumbnail`] || v.thumbnail,
       };
     });
+
+    // Update portfolio hero
+    siteData.portfolioHero = {
+      title: formData['portfolioHeroTitle'] || siteData.portfolioHero?.title || 'Our Work',
+      subtitle: formData['portfolioHeroSubtitle'] || siteData.portfolioHero?.subtitle || '',
+      backgroundImage: formData['portfolioHeroImage'] || siteData.portfolioHero?.backgroundImage || '',
+      logo: formData['portfolioHeroLogo'] || siteData.portfolioHero?.logo || '',
+    };
 
     setData(siteData);
     setShowToast(true);

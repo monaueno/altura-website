@@ -20,6 +20,14 @@ const defaultData = {
     photo: "/assets/images/about-photo.jpg",
     bio: "Marketing strategist passionate about helping brands connect with their audiences through authentic storytelling and data-driven creative."
   },
+  portfolioHero: {
+    title: "OUR WORK SPEAKS FOR ITSELF",
+    subtitle: "(BUT A LITTLE CONTEXT NEVER HURTS.)",
+  },
+  portfolioMountain: {
+    title: "CASE STUDIES",
+    subtitle: "Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.",
+  },
   services: [
     {
       id: "1",
@@ -55,28 +63,140 @@ const defaultData = {
   portfolio: [
     {
       id: "1",
-      slug: "sample-project-1",
-      title: "Sample Project 1",
-      shortDescription: "Strategic campaign for lifestyle brand focusing on millennial audience engagement.",
-      image: "/assets/portfolio/placeholder-1.jpg",
-      tagline: "Where authenticity meets strategy",
+      slug: "salt-final-sale",
+      title: "Salt Final Sale",
+      image: "/assets/Porfolio/Statics/Ziplock-Organizer.jpg",
       strategyBullets: [
-        "Identified core audience pain points through social listening",
-        "Developed messaging framework emphasizing emotional connection",
-        "Created cohesive visual system across all touchpoints"
+        {
+          title: "STRATEGIC PROMOTION",
+          description: "A limited-time \"Final Sale\" on two discontinued organizers drove urgency and increased traffic during a slower sales period."
+        },
+        {
+          title: "INVENTORY OPTIMIZATION",
+          description: "The promotion helped Salt clear remaining inventory of phased-out products while maintaining a controlled discount strategy."
+        },
+        {
+          title: "PERFORMANCE LIFT",
+          description: "Although only two products were discounted, the campaign drove additional full-price purchases, improving overall account performance."
+        }
+      ],
+      metrics: [
+        {
+          label: "ROAS",
+          value: "6.88",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC Home Goods / Organization)",
+          benchmarks: [
+            { level: "AVERAGE", range: "2.0 – 3.0" },
+            { level: "GOOD", range: "3.0 – 4.0" },
+            { level: "STRONG", range: "4.0 – 5.0" },
+            { level: "EXCELLENT", range: "5.0+", bold: true }
+          ]
+        },
+        {
+          label: "CTR",
+          value: "5.18%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC eCommerce)",
+          benchmarks: [
+            { level: "AVERAGE", range: "1.0% – 1.8%" },
+            { level: "GOOD", range: "1.8% – 2.5%" },
+            { level: "STRONG", range: "2.5% – 3.5%" },
+            { level: "EXCELLENT", range: "3.5%+", bold: true }
+          ]
+        }
       ]
     },
     {
       id: "2",
-      slug: "sample-project-2",
-      title: "Sample Project 2",
-      shortDescription: "Paid social campaign driving 3x ROAS for e-commerce client.",
-      image: "/assets/portfolio/placeholder-2.jpg",
-      tagline: "Data-driven creative that converts",
+      slug: "salt-drawer",
+      title: "Salt Drawer",
+      image: "/assets/Porfolio/Statics/Salt.jpeg",
       strategyBullets: [
-        "Conducted competitive analysis and market positioning",
-        "Tested 15+ creative variants to optimize performance",
-        "Scaled winning concepts across Meta and TikTok"
+        {
+          title: "HIGHLIGHT PRODUCT QUALITY",
+          description: "Emphasize the durability of Salt by Sabrina organizers through clean, product-focused visuals."
+        },
+        {
+          title: "REINFORCE CUSTOM-FIT DESIGN",
+          description: "Show the organizer placed directly in the drawer to communicate a precise, made-for-your-space fit."
+        },
+        {
+          title: "POSITION AS A PREMIUM, LASTING SOLUTION",
+          description: "Messaging like frames the product as a long-term investment and differentiates it from typical expandable organizers."
+        }
+      ],
+      metrics: [
+        {
+          label: "ROAS",
+          value: "8.36%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC Home Goods / Organization)",
+          benchmarks: [
+            { level: "AVERAGE", range: "2.0 – 3.0" },
+            { level: "GOOD", range: "3.0 – 4.0" },
+            { level: "STRONG", range: "4.0 – 5.0" },
+            { level: "EXCELLENT", range: "5.0+", bold: true }
+          ]
+        },
+        {
+          label: "CTR",
+          value: "3.26%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC eCommerce)",
+          benchmarks: [
+            { level: "AVERAGE", range: "1.0% – 1.8%" },
+            { level: "GOOD", range: "1.8% – 2.5%" },
+            { level: "STRONG", range: "2.5% – 3.5%", bold: true },
+            { level: "EXCELLENT", range: "3.5%+"}
+          ]
+        }
+      ]
+    },
+    {
+      id: "3",
+      slug: "solopro-tax",
+      title: "SoloPro Tax",
+      image: "/assets/Porfolio/Statics/SoloPro-Tax.jpg",
+      strategyBullets: [
+        {
+          title: "AUDIENCE IDENTIFICATION HOOK",
+          description: "The ad calls out specific self-employed roles, helping viewers quickly recognize the service is built for people like them."
+        },
+        {
+          title: "RELATABLE PROBLEM → CLEAR SOLUTION",
+          description: "Messaging acknowledges that freelancers aren’t accountants and positions SoloPro Tax as the service that handles taxes so professionals can focus on their work."
+        },
+        {
+          title: "ENGAGING DELIVERY",
+          description: "Dynamic text cycles through multiple professions while simple visuals of people working in their craft reinforce the message and increase viewer engagement."
+        }
+      ],
+      metrics: [
+        {
+          label: "CTR",
+          value: "4.99%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(Service-based Lead Gen)",
+          benchmarks: [
+            { level: "AVERAGE", range: "0.9% – 1.6%" },
+            { level: "GOOD", range: "1.6% – 2.5%" },
+            { level: "STRONG", range: "2.5% – 4%" },
+            { level: "EXCELLENT", range: "4%+", bold: true }
+          ]
+        },
+        {
+          label: "CPC",
+          value: "$0.47",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(Financial / Tax / Business Services)",
+          benchmarks: [
+            { level: "AVERAGE", range: "$1.50 – $4.00" },
+            { level: "GOOD", range: "$0.80 – $1.50" },
+            { level: "STRONG", range: "$0.40 – $0.80", bold: true },
+            { level: "EXCELLENT", range: "< $0.40"}
+          ]
+        }
       ]
     }
   ],
