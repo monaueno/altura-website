@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { getData } from '../utils/storage';
 
 function Navbar() {
   const [bgOpacity, setBgOpacity] = useState(0);
@@ -37,14 +38,6 @@ function Navbar() {
   }, [location.pathname]);
 
   // Pages with light/cream backgrounds need dark navbar text
-  const darkTextPages = ['/portfolio'];
-  const isDarkText = darkTextPages.includes(location.pathname);
-
-  // Pages with light/cream backgrounds need dark navbar text
-  const darkTextPages = ['/portfolio', '/services', '/blog'];
-  const isDarkText = darkTextPages.includes(location.pathname);
-
-  // Pages with light/cream backgrounds need dark navbar text
   const darkTextPages = ['/portfolio', '/services', '/blog'];
   const isDarkText = darkTextPages.includes(location.pathname);
 
@@ -73,12 +66,10 @@ function Navbar() {
       {/* Logo */}
       <Link to="/" className="relative z-10 flex items-center">
         <img
-          src={isDarkText
-            ? '/assets/Altura - Logo Suite/02 Secondary Logo/PNG/SecondaryLogo-FullColor.png'
-            : '/assets/Altura - Logo Suite/02 Secondary Logo/PNG/SecondaryLogo-White.png'
-          }
+          src={logoImage || '/assets/Images/altura-logo.png'}
           alt="Altura"
           className="w-[108px] h-[108px]"
+          style={isDarkText ? {} : { filter: 'brightness(0) invert(1)' }}
         />
       </Link>
 

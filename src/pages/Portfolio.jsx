@@ -7,14 +7,19 @@ import Footer from '../components/Footer';
 function Portfolio() {
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [heroData, setHeroData] = useState(null);
+  const [mountainData, setMountainData] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const siteData = getData();
     setPortfolioItems(siteData.portfolio || []);
     setHeroData(siteData.portfolioHero || {
-      title: 'Our Work',
-      subtitle: 'Strategic creative that drives results. Every project is built on insight, intention, and execution.',
-      backgroundImage: ''
+      title: 'OUR WORK SPEAKS FOR ITSELF.',
+      subtitle: '(But a little context never hurts.)',
+    });
+    setMountainData(siteData.portfolioMountain || {
+      title: 'CASE STUDIES',
+      subtitle: 'Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.',
     });
   }, []);
 
@@ -48,25 +53,13 @@ function Portfolio() {
       <Navbar />
 
       {/* Hero Section */}
-      <section
-        className="px-12 py-12 bg-near-black relative h-[80vh] min-h-[320px] flex items-center justify-end overflow-hidden"
-        style={{
-          backgroundImage: heroData?.backgroundImage ? `url(${heroData.backgroundImage})` : 'none',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        {/* Dark overlay if background image exists */}
-        {heroData?.backgroundImage && (
-          <div className="absolute inset-0 bg-near-black/60" />
-        )}
-
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-bold text-white mb-6 leading-[1.1]">
-            {heroData?.title || 'Our Work'}
+      <section className="px-12 pt-40 pb-12 bg-portfolio-cream">
+        <div className="max-w-[1300px] mx-auto">
+          <h1 className="font-display text-[50px] font-bold text-near-black leading-[1.05] tracking-[0.05em] uppercase">
+            {heroData?.title || 'OUR WORK SPEAKS FOR ITSELF.'}
           </h1>
-          <p className="text-white/70 text-[1.1rem] font-subheading max-w-2xl mx-auto">
-            {heroData?.subtitle || 'Strategic creative that drives results. Every project is built on insight, intention, and execution.'}
+          <p className="text-blue-dark text-[22px] font-subheading italic mt-2">
+            {heroData?.subtitle || '(But a little context never hurts.)'}
           </p>
         </div>
       </section>
