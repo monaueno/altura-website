@@ -203,11 +203,27 @@ const defaultData = {
   blog: [
     {
       id: "1",
-      slug: "why-creative-strategy-matters",
-      title: "Why Creative Strategy Matters More Than Your Budget",
-      date: "2025-03-01",
+      slug: "importance-of-creative-strategy",
+      title: "Importance of Creative Strategy",
+      date: "2026-03-01",
       coverImage: "",
-      body: "In today's crowded digital landscape, throwing money at ads isn't enough. The brands that win are the ones who lead with strategy—understanding their audience deeply and crafting messages that resonate on an emotional level..."
+      body: "In today's crowded digital landscape, throwing money at ads isn't enough. The brands that win are the ones who lead with strategy—understanding their audience deeply and crafting messages that resonate on an emotional level.\n\nCreative strategy is the bridge between knowing your audience and actually reaching them. It's the difference between content that gets scrolled past and content that stops someone mid-scroll.\n\nWhen I work with a brand, the first thing I do is dig into the why behind the creative. What does your audience actually care about? What language do they use? What problems keep them up at night?\n\nOnce you understand the people, the creative writes itself. The visuals, the copy, the hooks—they all flow from a place of genuine understanding rather than guesswork.\n\nThe brands I've seen win consistently are the ones willing to invest in strategy before they invest in spend. They take the time to get the foundation right, and the performance follows."
+    },
+    {
+      id: "2",
+      slug: "competitive-analysis-framework",
+      title: "Competitive Analysis Framework, What Hole Does Your Company Fill?",
+      date: "2026-03-15",
+      coverImage: "",
+      body: "Understanding your competitive landscape is about more than knowing who else exists in your space. It's about identifying the gaps—the unmet needs, the overlooked audiences, the messaging no one else is owning.\n\nA strong competitive analysis doesn't just map out what others are doing; it reveals where you can position yourself to stand out and win.\n\nHere's the framework I use with every client:\n\n1. Map the landscape — Who are your direct and indirect competitors? What are they saying, and to whom?\n\n2. Identify the gaps — Where is messaging falling flat? What audiences are underserved? What positioning is unclaimed?\n\n3. Define your unique value — Based on the gaps, what can you own? What story can only your brand tell?\n\n4. Build your positioning statement — A clear, concise articulation of who you serve, what you offer, and why it matters.\n\n5. Test and refine — Put your positioning into the market through creative and paid media, measure response, and iterate.\n\nThe brands that win aren't always the biggest or the loudest. They're the ones that understand exactly where they fit—and lean into it with confidence."
+    },
+    {
+      id: "3",
+      slug: "fix-ads-high-ctr-low-purchases",
+      title: "How to Fix Ads with High Click-Through Rates But Low Purchases (And Vice Versa)",
+      date: "2026-03-22",
+      coverImage: "",
+      body: "You're getting clicks but no conversions. Or worse—your ads aren't getting clicked at all, even though your product is solid. Both scenarios are frustrating, but they point to very different problems in your funnel.\n\nLet's break down what's actually happening and how to fix it.\n\nScenario 1: High CTR, Low Purchases\nYour ad is doing its job—it's grabbing attention and driving traffic. But something breaks down after the click. Common causes:\n\n- Landing page disconnect: The page doesn't match the promise of the ad\n- Pricing friction: The product costs more than the audience expected\n- Trust gap: Not enough social proof or reviews on the landing page\n- Too many steps: The checkout process is too complex\n\nScenario 2: Low CTR, Healthy Conversion Rate\nYour landing page converts well, but your ads aren't driving enough traffic. This usually means:\n\n- Weak hook: Your opening doesn't stop the scroll\n- Wrong audience: You're targeting people who aren't in-market\n- Creative fatigue: Your audience has seen the same ad too many times\n- Poor thumb-stop: The visual doesn't stand out in the feed\n\nThe fix for both scenarios starts with alignment. Your ad creative, your landing page, and your audience targeting all need to tell the same story to the same person at the right time."
     }
   ],
   testimonials: [
