@@ -20,6 +20,14 @@ const defaultData = {
     photo: "/assets/images/about-photo.jpg",
     bio: "Marketing strategist passionate about helping brands connect with their audiences through authentic storytelling and data-driven creative."
   },
+  portfolioHero: {
+    title: "OUR WORK SPEAKS FOR ITSELF",
+    subtitle: "(BUT A LITTLE CONTEXT NEVER HURTS.)",
+  },
+  portfolioMountain: {
+    title: "CASE STUDIES",
+    subtitle: "Explore our full-length case studies and see how strategy, creativity, and execution come together to drive real impact.",
+  },
   services: [
     {
       id: "1",
@@ -55,39 +63,167 @@ const defaultData = {
   portfolio: [
     {
       id: "1",
-      slug: "sample-project-1",
-      title: "Sample Project 1",
-      shortDescription: "Strategic campaign for lifestyle brand focusing on millennial audience engagement.",
-      image: "/assets/portfolio/placeholder-1.jpg",
-      tagline: "Where authenticity meets strategy",
+      slug: "salt-final-sale",
+      title: "Salt Final Sale",
+      image: "/assets/Porfolio/Statics/Ziplock-Organizer.jpg",
       strategyBullets: [
-        "Identified core audience pain points through social listening",
-        "Developed messaging framework emphasizing emotional connection",
-        "Created cohesive visual system across all touchpoints"
+        {
+          title: "STRATEGIC PROMOTION",
+          description: "A limited-time \"Final Sale\" on two discontinued organizers drove urgency and increased traffic during a slower sales period."
+        },
+        {
+          title: "INVENTORY OPTIMIZATION",
+          description: "The promotion helped Salt clear remaining inventory of phased-out products while maintaining a controlled discount strategy."
+        },
+        {
+          title: "PERFORMANCE LIFT",
+          description: "Although only two products were discounted, the campaign drove additional full-price purchases, improving overall account performance."
+        }
+      ],
+      metrics: [
+        {
+          label: "ROAS",
+          value: "6.88",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC Home Goods / Organization)",
+          benchmarks: [
+            { level: "AVERAGE", range: "2.0 – 3.0" },
+            { level: "GOOD", range: "3.0 – 4.0" },
+            { level: "STRONG", range: "4.0 – 5.0" },
+            { level: "EXCELLENT", range: "5.0+", bold: true }
+          ]
+        },
+        {
+          label: "CTR",
+          value: "5.18%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC eCommerce)",
+          benchmarks: [
+            { level: "AVERAGE", range: "1.0% – 1.8%" },
+            { level: "GOOD", range: "1.8% – 2.5%" },
+            { level: "STRONG", range: "2.5% – 3.5%" },
+            { level: "EXCELLENT", range: "3.5%+", bold: true }
+          ]
+        }
       ]
     },
     {
       id: "2",
-      slug: "sample-project-2",
-      title: "Sample Project 2",
-      shortDescription: "Paid social campaign driving 3x ROAS for e-commerce client.",
-      image: "/assets/portfolio/placeholder-2.jpg",
-      tagline: "Data-driven creative that converts",
+      slug: "salt-drawer",
+      title: "Salt Drawer",
+      image: "/assets/Porfolio/Statics/Salt.jpeg",
       strategyBullets: [
-        "Conducted competitive analysis and market positioning",
-        "Tested 15+ creative variants to optimize performance",
-        "Scaled winning concepts across Meta and TikTok"
+        {
+          title: "HIGHLIGHT PRODUCT QUALITY",
+          description: "Emphasize the durability of Salt by Sabrina organizers through clean, product-focused visuals."
+        },
+        {
+          title: "REINFORCE CUSTOM-FIT DESIGN",
+          description: "Show the organizer placed directly in the drawer to communicate a precise, made-for-your-space fit."
+        },
+        {
+          title: "POSITION AS A PREMIUM, LASTING SOLUTION",
+          description: "Messaging like frames the product as a long-term investment and differentiates it from typical expandable organizers."
+        }
+      ],
+      metrics: [
+        {
+          label: "ROAS",
+          value: "8.36%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC Home Goods / Organization)",
+          benchmarks: [
+            { level: "AVERAGE", range: "2.0 – 3.0" },
+            { level: "GOOD", range: "3.0 – 4.0" },
+            { level: "STRONG", range: "4.0 – 5.0" },
+            { level: "EXCELLENT", range: "5.0+", bold: true }
+          ]
+        },
+        {
+          label: "CTR",
+          value: "3.26%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(DTC eCommerce)",
+          benchmarks: [
+            { level: "AVERAGE", range: "1.0% – 1.8%" },
+            { level: "GOOD", range: "1.8% – 2.5%" },
+            { level: "STRONG", range: "2.5% – 3.5%", bold: true },
+            { level: "EXCELLENT", range: "3.5%+"}
+          ]
+        }
+      ]
+    },
+    {
+      id: "3",
+      slug: "solopro-tax",
+      title: "SoloPro Tax",
+      image: "/assets/Porfolio/Statics/SoloPro-Tax.jpg",
+      strategyBullets: [
+        {
+          title: "AUDIENCE IDENTIFICATION HOOK",
+          description: "The ad calls out specific self-employed roles, helping viewers quickly recognize the service is built for people like them."
+        },
+        {
+          title: "RELATABLE PROBLEM → CLEAR SOLUTION",
+          description: "Messaging acknowledges that freelancers aren’t accountants and positions SoloPro Tax as the service that handles taxes so professionals can focus on their work."
+        },
+        {
+          title: "ENGAGING DELIVERY",
+          description: "Dynamic text cycles through multiple professions while simple visuals of people working in their craft reinforce the message and increase viewer engagement."
+        }
+      ],
+      metrics: [
+        {
+          label: "CTR",
+          value: "4.99%",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(Service-based Lead Gen)",
+          benchmarks: [
+            { level: "AVERAGE", range: "0.9% – 1.6%" },
+            { level: "GOOD", range: "1.6% – 2.5%" },
+            { level: "STRONG", range: "2.5% – 4%" },
+            { level: "EXCELLENT", range: "4%+", bold: true }
+          ]
+        },
+        {
+          label: "CPC",
+          value: "$0.47",
+          industryLabel: "INDUSTRY STANDARD",
+          industryContext: "(Financial / Tax / Business Services)",
+          benchmarks: [
+            { level: "AVERAGE", range: "$1.50 – $4.00" },
+            { level: "GOOD", range: "$0.80 – $1.50" },
+            { level: "STRONG", range: "$0.40 – $0.80", bold: true },
+            { level: "EXCELLENT", range: "< $0.40"}
+          ]
+        }
       ]
     }
   ],
   blog: [
     {
       id: "1",
-      slug: "why-creative-strategy-matters",
-      title: "Why Creative Strategy Matters More Than Your Budget",
-      date: "2025-03-01",
+      slug: "importance-of-creative-strategy",
+      title: "Importance of Creative Strategy",
+      date: "2026-03-01",
       coverImage: "",
-      body: "In today's crowded digital landscape, throwing money at ads isn't enough. The brands that win are the ones who lead with strategy—understanding their audience deeply and crafting messages that resonate on an emotional level..."
+      body: "In today's crowded digital landscape, throwing money at ads isn't enough. The brands that win are the ones who lead with strategy—understanding their audience deeply and crafting messages that resonate on an emotional level.\n\nCreative strategy is the bridge between knowing your audience and actually reaching them. It's the difference between content that gets scrolled past and content that stops someone mid-scroll.\n\nWhen I work with a brand, the first thing I do is dig into the why behind the creative. What does your audience actually care about? What language do they use? What problems keep them up at night?\n\nOnce you understand the people, the creative writes itself. The visuals, the copy, the hooks—they all flow from a place of genuine understanding rather than guesswork.\n\nThe brands I've seen win consistently are the ones willing to invest in strategy before they invest in spend. They take the time to get the foundation right, and the performance follows."
+    },
+    {
+      id: "2",
+      slug: "competitive-analysis-framework",
+      title: "Competitive Analysis Framework, What Hole Does Your Company Fill?",
+      date: "2026-03-15",
+      coverImage: "",
+      body: "Understanding your competitive landscape is about more than knowing who else exists in your space. It's about identifying the gaps—the unmet needs, the overlooked audiences, the messaging no one else is owning.\n\nA strong competitive analysis doesn't just map out what others are doing; it reveals where you can position yourself to stand out and win.\n\nHere's the framework I use with every client:\n\n1. Map the landscape — Who are your direct and indirect competitors? What are they saying, and to whom?\n\n2. Identify the gaps — Where is messaging falling flat? What audiences are underserved? What positioning is unclaimed?\n\n3. Define your unique value — Based on the gaps, what can you own? What story can only your brand tell?\n\n4. Build your positioning statement — A clear, concise articulation of who you serve, what you offer, and why it matters.\n\n5. Test and refine — Put your positioning into the market through creative and paid media, measure response, and iterate.\n\nThe brands that win aren't always the biggest or the loudest. They're the ones that understand exactly where they fit—and lean into it with confidence."
+    },
+    {
+      id: "3",
+      slug: "fix-ads-high-ctr-low-purchases",
+      title: "How to Fix Ads with High Click-Through Rates But Low Purchases (And Vice Versa)",
+      date: "2026-03-22",
+      coverImage: "",
+      body: "You're getting clicks but no conversions. Or worse—your ads aren't getting clicked at all, even though your product is solid. Both scenarios are frustrating, but they point to very different problems in your funnel.\n\nLet's break down what's actually happening and how to fix it.\n\nScenario 1: High CTR, Low Purchases\nYour ad is doing its job—it's grabbing attention and driving traffic. But something breaks down after the click. Common causes:\n\n- Landing page disconnect: The page doesn't match the promise of the ad\n- Pricing friction: The product costs more than the audience expected\n- Trust gap: Not enough social proof or reviews on the landing page\n- Too many steps: The checkout process is too complex\n\nScenario 2: Low CTR, Healthy Conversion Rate\nYour landing page converts well, but your ads aren't driving enough traffic. This usually means:\n\n- Weak hook: Your opening doesn't stop the scroll\n- Wrong audience: You're targeting people who aren't in-market\n- Creative fatigue: Your audience has seen the same ad too many times\n- Poor thumb-stop: The visual doesn't stand out in the feed\n\nThe fix for both scenarios starts with alignment. Your ad creative, your landing page, and your audience targeting all need to tell the same story to the same person at the right time."
     }
   ],
   testimonials: [
