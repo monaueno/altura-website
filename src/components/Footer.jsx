@@ -1,4 +1,9 @@
+import { getData } from '../utils/storage';
+
 function Footer() {
+  const data = getData();
+  const home = data.home || {};
+
   return (
     <footer className="bg-near-black px-12 py-[100px] relative overflow-hidden">
       {/* Large logo overlay — text left, logomark right, right edge at ~50% */}
@@ -31,7 +36,7 @@ function Footer() {
               href="mailto:annalise@alturamarketing.co"
               className="block text-[0.85rem] text-white transition-colors hover:text-white leading-[1.9]"
             >
-              annalise@alturamarketing.co
+              {home.footerEmail || 'annalise@alturamarketing.co'}
             </a>
           </div>
 
@@ -61,7 +66,7 @@ function Footer() {
               rel="noopener noreferrer"
               className="block text-[0.85rem] text-white transition-colors hover:text-white leading-[1.9]"
             >
-              alturamarketing.co
+              {home.footerWebsite || 'alturamarketing.co'}
             </a>
           </div>
         </div>
@@ -71,7 +76,7 @@ function Footer() {
           href="/services#contact"
           className="inline-block px-8 py-[14px] bg-white text-near-black font-body font-display text-[0.82rem] tracking-[0.1em] uppercase rounded-[2px] transition-all hover:bg-accent-light hover:-translate-y-[1px]"
         >
-          Hire Us!
+          {home.footerCTAText || 'Hire Us!'}
         </a>
       </div>
 

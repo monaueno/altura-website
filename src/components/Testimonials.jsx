@@ -3,11 +3,13 @@ import { getData } from '../utils/storage';
 
 function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
+  const [homeData, setHomeData] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const siteData = getData();
     setTestimonials(siteData.testimonials);
+    setHomeData(siteData.home || {});
   }, []);
 
   const isFirst = currentIndex === 0;
@@ -42,13 +44,13 @@ function Testimonials() {
       {/* Left Side - Text */}
       <div className="relative z-10">
         <p className="text-[0.72rem] tracking-[0.25em] uppercase text-accent mb-6 font-medium">
-          What Clients Say
+          {homeData.testimonialsLabel || 'What Clients Say'}
         </p>
         <h2 className="font-display text-[clamp(1.8rem,3vw,2.8rem)] text-white font-bold leading-[1.2] mb-5">
-          It's About Understanding <em className="text-accent italic">People</em>…Not Just Platforms.
+          {homeData.testimonialsHeadline || "It's About Understanding People...Not Just Platforms."}
         </h2>
         <p className="text-white/60 text-[0.95rem] leading-[1.75] font-light max-w-[380px]">
-          We focus on uncovering what your audience actually cares about, then shaping creative and messaging that feels natural, emotional, and aligned with how they think and buy. When strategy leads, performance follows.
+          {homeData.testimonialsBody || ''}
         </p>
       </div>
 

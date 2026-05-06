@@ -81,21 +81,6 @@ function ServicesEditor({ formData, setFormData }) {
               className={`${inputClass} resize-y min-h-[120px]`}
             />
           </div>
-          <div>
-            <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">
-              "Learn More" Link
-            </label>
-            <input
-              type="text"
-              value={editing.link || ''}
-              onChange={(e) => updateField(editing.id, 'link', e.target.value)}
-              placeholder="/services or https://..."
-              className={inputClass}
-            />
-            <p className="text-[0.8rem] text-near-black/40 mt-2">
-              Where the "Learn More" button takes visitors. Leave blank to hide the button.
-            </p>
-          </div>
         </div>
       </div>
     );
@@ -111,6 +96,23 @@ function ServicesEditor({ formData, setFormData }) {
         <p className="text-[0.95rem] text-near-black/50 leading-relaxed">
           Manage the services shown on the homepage and Services page.
         </p>
+      </div>
+
+      {/* Homepage Services Section Text */}
+      <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-8 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+        <h3 className="text-[0.9rem] font-semibold text-near-black mb-4">Homepage Section Text (left side)</h3>
+        <div className="mb-4">
+          <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2">Headline</label>
+          <input type="text" value={formData.servicesHeadline || ''} onChange={(e) => setFormData(prev => ({ ...prev, servicesHeadline: e.target.value }))} placeholder="Strategic Marketing Support for Growing Brands" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+        </div>
+        <div className="mb-4">
+          <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2">Body Text</label>
+          <textarea value={formData.servicesBody || ''} onChange={(e) => setFormData(prev => ({ ...prev, servicesBody: e.target.value }))} placeholder="Annalise Marketing offers..." className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none resize-y min-h-[80px] transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+        </div>
+        <div>
+          <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2">CTA Button Text</label>
+          <input type="text" value={formData.servicesCTAText || ''} onChange={(e) => setFormData(prev => ({ ...prev, servicesCTAText: e.target.value }))} placeholder="Hire Us" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+        </div>
       </div>
 
       <div className="flex items-center justify-between mb-5">

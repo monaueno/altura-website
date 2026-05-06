@@ -139,6 +139,23 @@ function TestimonialsEditor({ formData, setFormData }) {
         </p>
       </div>
 
+      {/* Section Text */}
+      <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-8 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+        <h3 className="text-[0.9rem] font-semibold text-near-black mb-4">Section Text (left side)</h3>
+        <div className="mb-4">
+          <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2">Label</label>
+          <input type="text" value={formData.testimonialsLabel || ''} onChange={(e) => setFormData(prev => ({ ...prev, testimonialsLabel: e.target.value }))} placeholder="What Clients Say" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+        </div>
+        <div className="mb-4">
+          <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2">Headline</label>
+          <input type="text" value={formData.testimonialsHeadline || ''} onChange={(e) => setFormData(prev => ({ ...prev, testimonialsHeadline: e.target.value }))} placeholder="It's About Understanding People...Not Just Platforms." className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+        </div>
+        <div>
+          <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2">Body Text</label>
+          <textarea value={formData.testimonialsBody || ''} onChange={(e) => setFormData(prev => ({ ...prev, testimonialsBody: e.target.value }))} placeholder="We focus on uncovering what your audience..." className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none resize-y min-h-[80px] transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+        </div>
+      </div>
+
       <div className="flex items-center justify-between mb-5">
         <h3 className="text-[1.1rem] font-semibold text-near-black">Testimonials</h3>
         <button

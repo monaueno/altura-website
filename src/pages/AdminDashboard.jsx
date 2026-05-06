@@ -43,6 +43,7 @@ function AdminDashboard() {
       label: 'About',
       sections: [
         { id: 'about', label: 'About Page' },
+        { id: 'aboutText', label: 'Page Text' },
       ],
     },
     {
@@ -50,6 +51,14 @@ function AdminDashboard() {
       label: 'Blog',
       sections: [
         { id: 'blog', label: 'Blog Posts' },
+        { id: 'blogText', label: 'Page Text' },
+      ],
+    },
+    {
+      id: 'servicesPage',
+      label: 'Services Page',
+      sections: [
+        { id: 'servicesPageText', label: 'Page Text' },
       ],
     },
     {
@@ -133,6 +142,22 @@ function AdminDashboard() {
       heroVideoUrl: formData['heroVideoUrl'] || siteData.home.heroVideoUrl || '',
       staticShowcaseHeadline: formData['staticShowcaseHeadline'] || siteData.home.staticShowcaseHeadline,
       staticShowcaseSubheading: formData['staticShowcaseSubheading'] || siteData.home.staticShowcaseSubheading,
+      testimonialsLabel: formData['testimonialsLabel'] ?? siteData.home.testimonialsLabel,
+      testimonialsHeadline: formData['testimonialsHeadline'] ?? siteData.home.testimonialsHeadline,
+      testimonialsBody: formData['testimonialsBody'] ?? siteData.home.testimonialsBody,
+      servicesHeadline: formData['servicesHeadline'] ?? siteData.home.servicesHeadline,
+      servicesBody: formData['servicesBody'] ?? siteData.home.servicesBody,
+      servicesCTAText: formData['servicesCTAText'] ?? siteData.home.servicesCTAText,
+      servicesPageHeadline: formData['servicesPageHeadline'] ?? siteData.home.servicesPageHeadline,
+      servicesPageContactHeadline: formData['servicesPageContactHeadline'] ?? siteData.home.servicesPageContactHeadline,
+      servicesPageContactSubheadline: formData['servicesPageContactSubheadline'] ?? siteData.home.servicesPageContactSubheadline,
+      blogHeadline: formData['blogHeadline'] ?? siteData.home.blogHeadline,
+      aboutHeadline: formData['aboutHeadline'] ?? siteData.home.aboutHeadline,
+      aboutAttribution: formData['aboutAttribution'] ?? siteData.home.aboutAttribution,
+      aboutCTA: formData['aboutCTA'] ?? siteData.home.aboutCTA,
+      footerEmail: formData['footerEmail'] ?? siteData.home.footerEmail,
+      footerWebsite: formData['footerWebsite'] ?? siteData.home.footerWebsite,
+      footerCTAText: formData['footerCTAText'] ?? siteData.home.footerCTAText,
     };
 
     // Save nested CRUD data for testimonials and services
@@ -566,30 +591,86 @@ function AdminDashboard() {
           {activeSection === 'footer' && (
             <div className="animate-[fadeIn_0.3s_ease-out]">
               <div className="mb-10">
-                <h2 className="font-display text-[1.75rem] font-semibold text-near-black mb-3 tracking-tight">
-                  Footer
-                </h2>
-                <p className="text-[0.95rem] text-near-black/50 leading-relaxed">
-                  Contact info and social links at the bottom of every page.
-                </p>
+                <h2 className="font-display text-[1.75rem] font-semibold text-near-black mb-3 tracking-tight">Footer</h2>
+                <p className="text-[0.95rem] text-near-black/50 leading-relaxed">Contact info and links at the bottom of every page.</p>
               </div>
-
               <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-                <div className="flex items-center gap-2.5 mb-6">
-                  <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <h3 className="text-[0.9rem] font-semibold text-near-black">
-                    Contact & Social Links
-                  </h3>
+                <h3 className="text-[0.9rem] font-semibold text-near-black mb-6">Footer Content</h3>
+                <div className="mb-5">
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Email</label>
+                  <input type="text" value={formData.footerEmail || ''} onChange={(e) => handleInputChange('footerEmail', e.target.value)} placeholder="annalise@alturamarketing.co" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
                 </div>
-                <div className="p-4 bg-accent/[0.04] rounded-lg border border-accent/[0.08]">
-                  <p className="text-[0.85rem] text-near-black/55 leading-relaxed flex items-start gap-2">
-                    <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                    </svg>
-                    To update these fields, you'll need to edit the Footer component directly. Coming soon in a future update.
-                  </p>
+                <div className="mb-5">
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Website</label>
+                  <input type="text" value={formData.footerWebsite || ''} onChange={(e) => handleInputChange('footerWebsite', e.target.value)} placeholder="alturamarketing.co" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+                <div>
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">CTA Button Text</label>
+                  <input type="text" value={formData.footerCTAText || ''} onChange={(e) => handleInputChange('footerCTAText', e.target.value)} placeholder="Hire Us!" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Services Page Text */}
+          {activeSection === 'servicesPageText' && (
+            <div className="animate-[fadeIn_0.3s_ease-out]">
+              <div className="mb-10">
+                <h2 className="font-display text-[1.75rem] font-semibold text-near-black mb-3 tracking-tight">Services Page Text</h2>
+                <p className="text-[0.95rem] text-near-black/50 leading-relaxed">Headings and text on the Services page.</p>
+              </div>
+              <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                <div className="mb-5">
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Hero Headline</label>
+                  <input type="text" value={formData.servicesPageHeadline || ''} onChange={(e) => handleInputChange('servicesPageHeadline', e.target.value)} className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+                <div className="mb-5">
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Contact Section Headline</label>
+                  <input type="text" value={formData.servicesPageContactHeadline || ''} onChange={(e) => handleInputChange('servicesPageContactHeadline', e.target.value)} className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+                <div>
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Contact Section Subheadline</label>
+                  <input type="text" value={formData.servicesPageContactSubheadline || ''} onChange={(e) => handleInputChange('servicesPageContactSubheadline', e.target.value)} className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* About Page Text */}
+          {activeSection === 'aboutText' && (
+            <div className="animate-[fadeIn_0.3s_ease-out]">
+              <div className="mb-10">
+                <h2 className="font-display text-[1.75rem] font-semibold text-near-black mb-3 tracking-tight">About Page Text</h2>
+                <p className="text-[0.95rem] text-near-black/50 leading-relaxed">Headings and labels on the About page.</p>
+              </div>
+              <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                <div className="mb-5">
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Section Headline</label>
+                  <input type="text" value={formData.aboutHeadline || ''} onChange={(e) => handleInputChange('aboutHeadline', e.target.value)} placeholder="About Us" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+                <div className="mb-5">
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Attribution</label>
+                  <input type="text" value={formData.aboutAttribution || ''} onChange={(e) => handleInputChange('aboutAttribution', e.target.value)} placeholder="-Annalise Hart, CEO" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+                <div>
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">CTA Text</label>
+                  <input type="text" value={formData.aboutCTA || ''} onChange={(e) => handleInputChange('aboutCTA', e.target.value)} placeholder="Ready to take your business to new heights?" className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Blog Page Text */}
+          {activeSection === 'blogText' && (
+            <div className="animate-[fadeIn_0.3s_ease-out]">
+              <div className="mb-10">
+                <h2 className="font-display text-[1.75rem] font-semibold text-near-black mb-3 tracking-tight">Blog Page Text</h2>
+                <p className="text-[0.95rem] text-near-black/50 leading-relaxed">The headline on the blog listing page.</p>
+              </div>
+              <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                <div>
+                  <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Blog Headline</label>
+                  <input type="text" value={formData.blogHeadline || ''} onChange={(e) => handleInputChange('blogHeadline', e.target.value)} placeholder="Ideas, insights, and the occasional hot take." className="w-full px-3.5 py-2.5 border border-near-black/[0.06] rounded-lg font-body text-[0.95rem] text-near-black bg-white outline-none transition-all duration-150 focus:border-accent focus:ring-1 focus:ring-accent/15 placeholder:text-near-black/30 hover:border-near-black/[0.12]" />
                 </div>
               </div>
             </div>

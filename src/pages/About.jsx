@@ -121,7 +121,7 @@ function About() {
           {/* Right — bio text */}
           <div className="flex-1 flex flex-col justify-center" ref={addRevealRef}>
             <h2 className="font-display font-bold text-[50px] leading-[1.05] uppercase text-near-black mb-8">
-              About Us
+              {data.home?.aboutHeadline || 'About Us'}
             </h2>
 
             <div className="font-subheading font-light text-[18px] leading-[1.2] text-near-black space-y-5">
@@ -131,7 +131,7 @@ function About() {
             </div>
 
             <p className="font-subheading font-light text-[15px] uppercase tracking-[0.05em] text-near-black mt-8">
-              <span className="tracking-[0.5em]">-</span>Annalise Hart, CEO
+              <span className="tracking-[0.5em]">-</span>{(data.home?.aboutAttribution || 'Annalise Hart, CEO').replace(/^-/, '')}
             </p>
           </div>
         </div>
@@ -151,8 +151,7 @@ function About() {
 
         <div className="relative z-10 text-center px-6">
           <h2 className="font-display font-bold text-[40px] leading-[1.05] uppercase text-white max-w-[500px] mx-auto">
-            Ready to take your business to{' '}
-            <span className="italic text-accent">new heights?</span>
+            {data.home?.aboutCTA || 'Ready to take your business to new heights?'}
           </h2>
           <Link
             to="/services"

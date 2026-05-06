@@ -58,7 +58,7 @@ function Blog() {
           className="font-display font-bold text-[50px] leading-[1.05] uppercase text-near-black max-w-[656px]"
           ref={addRevealRef}
         >
-          Ideas, insights, and the occasional hot take.
+          {data.home?.blogHeadline || 'Ideas, insights, and the occasional hot take.'}
         </h1>
       </section>
 

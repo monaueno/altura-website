@@ -39,9 +39,9 @@ function Services() {
 
   // Scroll to #contact if hash is present
   useEffect(() => {
-    if (location.hash === '#contact') {
+    if (location.hash) {
       setTimeout(() => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
   }, [location.hash]);
@@ -93,12 +93,7 @@ function Services() {
         {/* Headline */}
         <div className="relative z-10 max-w-[700px] mx-auto text-center px-6" ref={addRevealRef}>
           <h1 className="font-display font-bold text-[50px] leading-[1.05] uppercase text-near-black">
-            You imagine what's possible.{' '}
-            <br />
-            We design{' '}
-            <span className="text-blue-dark">
-              the strategy to get you there.
-            </span>
+            {data.home?.servicesPageHeadline || "You imagine what's possible. We design the strategy to get you there."}
           </h1>
         </div>
 
@@ -110,19 +105,15 @@ function Services() {
           {displayServices.map((service) => (
             <div
               key={service.id}
+              id={`service-${service.id}`}
               className="bg-white rounded-[10px] p-12 flex flex-col items-center text-center"
             >
               <h3 className="font-display font-bold text-[27px] leading-[1.1] uppercase text-near-black mb-6 max-w-[442px]">
                 {service.title}
               </h3>
-              <p className="font-subheading font-light text-[18px] leading-[1.25] text-near-black max-w-[466px] mb-8">
+              <p className="font-subheading font-light text-[18px] leading-[1.25] text-near-black max-w-[466px]">
                 {service.description}
               </p>
-              {service.link && (
-                <a href={service.link} className="inline-block border-2 border-near-black px-6 py-2 font-display font-bold text-[16px] tracking-[0.05em] uppercase hover:bg-near-black hover:text-white transition-colors">
-                  Learn More
-                </a>
-              )}
             </div>
           ))}
         </div>
@@ -134,12 +125,10 @@ function Services() {
           {/* Left — heading */}
           <div className="lg:w-[380px] shrink-0" ref={addRevealRef}>
             <h2 className="font-display font-bold text-[40px] leading-[1.05] uppercase text-near-black">
-              Have an idea?
-              <br />
-              Let's make it happen.
+              {data.home?.servicesPageContactHeadline || "Have an idea? Let's make it happen."}
             </h2>
             <p className="font-subheading font-light text-[18px] leading-[1.25] text-near-black mt-4">
-              We'd love to hear from you.
+              {data.home?.servicesPageContactSubheadline || "We'd love to hear from you."}
             </p>
           </div>
 
