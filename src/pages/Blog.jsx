@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -6,6 +6,7 @@ import { getData } from '../utils/storage';
 
 function Blog() {
   const data = getData();
+  const [copiedId, setCopiedId] = useState(null);
   const posts = (data.blog || []).sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
@@ -116,9 +117,20 @@ function Blog() {
                         {/* Divider */}
                         <div className="w-px h-[60px] bg-near-black/20" />
 
-                        {/* Share & comment icons */}
-                        <div className="flex flex-col gap-3">
-                          <button className="text-near-black/60 hover:text-near-black transition-colors">
+                        {/* Share icon */}
+                        <div className="relative flex flex-col gap-3">
+                          <button
+                            onClick={async () => {
+                              const url = `${window.location.origin}/blog/${post.slug}`;
+                              await navigator.clipboard.writeText(url);
+                              if (navigator.share) {
+                                navigator.share({ title: post.title, url }).catch(() => {});
+                              }
+                              setCopiedId(post.id);
+                              setTimeout(() => setCopiedId(null), 2000);
+                            }}
+                            className="text-near-black/60 hover:text-near-black transition-colors cursor-pointer bg-transparent border-none"
+                          >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                               <circle cx="18" cy="5" r="3" />
                               <circle cx="6" cy="12" r="3" />
@@ -127,11 +139,11 @@ function Blog() {
                               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                             </svg>
                           </button>
-                          <button className="text-near-black/60 hover:text-near-black transition-colors">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                            </svg>
-                          </button>
+                          {copiedId === post.id && (
+                            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 bg-near-black text-white px-5 py-2.5 rounded-lg text-[0.9rem] font-display font-medium tracking-wide whitespace-nowrap animate-[fadeIn_0.2s_ease-out] shadow-lg">
+                              Link copied!
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -144,6 +156,13 @@ function Blog() {
       </section>
 
       <Footer />
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
