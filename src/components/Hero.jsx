@@ -25,7 +25,7 @@ function Hero() {
   if (!data) return null;
 
   return (
-    <section className="relative h-screen min-h-[640px] flex items-center justify-end px-16 overflow-hidden">
+    <section className="relative h-screen min-h-[640px] flex items-center justify-end px-4 md:px-16 overflow-hidden">
       {/* Background — image always behind, video layered on top */}
       <div className="absolute inset-0 bg-near-black overflow-hidden">
         {data.heroImage && (
@@ -49,8 +49,8 @@ function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-[479px] flex flex-col">
-        <h1 className="font-display text-[50px] font-bold text-white leading-[105%] tracking-[0%] mb-5 uppercase w-[479px]">
+      <div className="relative z-10 w-full md:w-[479px] flex flex-col">
+        <h1 className="font-display text-[clamp(1.75rem,7vw,50px)] font-bold text-white leading-[105%] tracking-[0%] mb-5 uppercase w-full md:w-[479px]">
           {data.heroHeadline.split('new heights').map((part, i, arr) => (
             i < arr.length - 1 ? (
               <span key={i}>
@@ -60,7 +60,7 @@ function Hero() {
             ) : part
           ))}
         </h1>
-        <p className="font-subheading text-[18px] font-light text-white/75 leading-[125%] tracking-[0%] max-w-[420px] mb-9">
+        <p className="font-subheading text-[clamp(14px,3.5vw,18px)] font-light text-white/75 leading-[125%] tracking-[0%] max-w-full md:max-w-[420px] mb-9">
           {data.heroSubheadline}
         </p>
         <a

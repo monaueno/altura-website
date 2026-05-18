@@ -45,7 +45,8 @@ function Portfolio() {
       <section className="flex flex-col">
         {brands.map((brand) => {
           const isExpanded = expandedId === brand.id;
-          const ads = brand.ads || [];
+          const rawAds = brand.ads || [];
+          const ads = rawAds.map(ad => typeof ad === 'string' ? { type: 'static', src: ad } : ad);
 
           return (
             <div key={brand.id}>
@@ -63,36 +64,91 @@ function Portfolio() {
                 />
               </button>
 
-              {/* Expanded Ads Section */}
+              {/* Expanded Ads Section — full viewport height */}
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
-                }`}
+                className="overflow-hidden transition-all duration-700 ease-in-out"
+                style={{
+                  maxHeight: isExpanded ? 'calc(90vh - calc(100vw / 10))' : '0px',
+                  opacity: isExpanded ? 1 : 0,
+                }}
               >
-                <div className="bg-portfolio-cream py-12 px-8">
-                  <div className="max-w-[900px] mx-auto">
+                <div className="h-full flex flex-col items-center justify-center px-6 py-6" style={{ backgroundColor: brand.bgColor }}>
+                  <div className="max-w-7xl w-full h-full flex flex-col">
                     {ads.length === 0 ? (
                       <p className="text-center text-near-black/50 font-subheading text-[1rem] py-8">
                         Ads coming soon for {brand.name}.
                       </p>
-                    ) : (
-                      <>
-                        <div className="flex items-center justify-center mb-6">
-                          <img
-                            src={ads[currentAd]}
-                            alt={`${brand.name} ad ${currentAd + 1}`}
-                            className="max-w-full max-h-[550px] object-contain rounded-lg"
-                          />
-                        </div>
+                    ) : (() => {
+                      const adsPerSlide = 3;
+                      const totalSlides = Math.ceil(ads.length / adsPerSlide);
+                      const slideAds = ads.slice(currentAd * adsPerSlide, currentAd * adsPerSlide + adsPerSlide);
+                      const arrowColor = brand.arrowColor || '#000000';
+                      return (
+                        <>
+                          <div className="flex items-center justify-center gap-4 mb-6 flex-1 min-h-0">
+                            {/* Left Arrow */}
+                            <button
+                              onClick={() => setCurrentAd(prev => Math.max(0, prev - 1))}
+                              disabled={currentAd === 0}
+                              className="shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center cursor-pointer bg-transparent transition-opacity disabled:opacity-20"
+                              style={{ borderColor: arrowColor }}
+                              aria-label="Previous slide"
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke={arrowColor} strokeWidth={2.5} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                              </svg>
+                            </button>
 
-                        {/* Dot Navigation */}
-                        {ads.length > 1 && (
-                          <div className="flex items-center justify-center gap-3">
-                            {ads.map((_, idx) => (
+                            <div className="flex items-center justify-center gap-8 flex-1 min-h-0">
+                            {slideAds.map((ad, idx) => (
+                              <div key={currentAd * adsPerSlide + idx} className="relative group">
+                                {ad.type === 'video' ? (
+                                  <>
+                                    <img
+                                      src={ad.thumbnail || ad.src}
+                                      alt={`${brand.name} ad ${currentAd * adsPerSlide + idx + 1}`}
+                                      className="max-h-[500px] object-contain"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors backdrop-blur-sm">
+                                        <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <img
+                                    src={ad.src}
+                                    alt={`${brand.name} ad ${currentAd * adsPerSlide + idx + 1}`}
+                                    className="max-h-[500px] object-contain"
+                                  />
+                                )}
+                              </div>
+                            ))}
+                            </div>
+
+                            {/* Right Arrow */}
+                            <button
+                              onClick={() => setCurrentAd(prev => Math.min(totalSlides - 1, prev + 1))}
+                              disabled={currentAd === totalSlides - 1}
+                              className="shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center cursor-pointer bg-transparent transition-opacity disabled:opacity-20"
+                              style={{ borderColor: arrowColor }}
+                              aria-label="Next slide"
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke={arrowColor} strokeWidth={2.5} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </button>
+                          </div>
+
+                          {/* Dot Navigation — always reserves space for consistent height */}
+                          <div className="flex items-center justify-center gap-3 h-6">
+                            {totalSlides > 1 && Array.from({ length: totalSlides }, (_, idx) => (
                               <button
                                 key={idx}
                                 onClick={() => setCurrentAd(idx)}
-                                aria-label={`View ad ${idx + 1}`}
+                                aria-label={`View slide ${idx + 1}`}
                                 className={`rounded-full transition-all cursor-pointer border-none ${
                                   idx === currentAd
                                     ? 'w-3 h-3 bg-near-black'
@@ -101,9 +157,9 @@ function Portfolio() {
                               />
                             ))}
                           </div>
-                        )}
-                      </>
-                    )}
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
               </div>

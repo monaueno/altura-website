@@ -43,10 +43,10 @@ function Blog() {
   };
 
   // Placeholder gradients for posts without cover images
-  const placeholderGradients = [
-    'from-near-black to-dark-gray',
-    'from-dark-gray to-mid-gray',
-    'from-blue-dark to-accent-dark',
+  const placeholderColors = [
+    'linear-gradient(135deg, #1a1a1a, #333333)',
+    'linear-gradient(135deg, #2a2a2a, #444444)',
+    'linear-gradient(135deg, #1e2a3a, #3a3a3a)',
   ];
 
   return (
@@ -56,7 +56,7 @@ function Blog() {
       {/* Header */}
       <section className="pt-[180px] pb-12 px-6 max-w-[1300px] mx-auto">
         <h1
-          className="font-display font-bold text-[50px] leading-[1.05] uppercase text-near-black max-w-[656px]"
+          className="font-display font-bold text-[28px] md:text-[50px] leading-[1.05] uppercase text-near-black max-w-[656px]"
           ref={addRevealRef}
         >
           {data.home?.blogHeadline || 'Ideas, insights, and the occasional hot take.'}
@@ -70,7 +70,7 @@ function Blog() {
             {/* Month header */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
               <div className="lg:w-[200px] shrink-0" ref={addRevealRef}>
-                <h2 className="font-display font-bold text-[40px] leading-[1.05] uppercase text-near-black">
+                <h2 className="font-display font-bold text-[28px] md:text-[40px] leading-[1.05] uppercase text-near-black">
                   {monthYear}
                 </h2>
               </div>
@@ -80,7 +80,7 @@ function Blog() {
                 {monthPosts.map((post, i) => (
                   <article key={post.id} className="reveal" ref={addRevealRef}>
                     {/* Cover image */}
-                    <div className="w-full h-[347px] rounded-[10px] overflow-hidden mb-4">
+                    <div className="w-full h-[200px] md:h-[347px] rounded-[10px] overflow-hidden mb-4">
                       {post.coverImage ? (
                         <img
                           src={post.coverImage}
@@ -89,9 +89,8 @@ function Blog() {
                         />
                       ) : (
                         <div
-                          className={`w-full h-full bg-gradient-to-br ${
-                            placeholderGradients[i % placeholderGradients.length]
-                          } flex items-center justify-center`}
+                          className="w-full h-full flex items-center justify-center"
+                          style={{ background: placeholderColors[i % placeholderColors.length] }}
                         >
                           <span className="font-display font-bold text-white/20 text-[80px] uppercase">
                             Blog
@@ -101,8 +100,8 @@ function Blog() {
                     </div>
 
                     {/* Post meta row */}
-                    <div className="flex items-center justify-between gap-4">
-                      <h3 className="font-display font-semibold text-[27px] leading-[1.1] uppercase text-near-black max-w-[533px]">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <h3 className="font-display font-semibold text-[20px] md:text-[27px] leading-[1.1] uppercase text-near-black max-w-full md:max-w-[533px]">
                         {post.title}
                       </h3>
 
@@ -115,11 +114,12 @@ function Blog() {
                         </Link>
 
                         {/* Divider */}
-                        <div className="w-px h-[60px] bg-near-black/20" />
+                        <div className="w-px h-[60px] bg-near-black/20 hidden md:block" />
 
                         {/* Share icon */}
                         <div className="relative flex flex-col gap-3">
                           <button
+                            aria-label={`Share "${post.title}"`}
                             onClick={async () => {
                               const url = `${window.location.origin}/blog/${post.slug}`;
                               await navigator.clipboard.writeText(url);

@@ -41,7 +41,12 @@ function Services() {
   useEffect(() => {
     if (location.hash) {
       setTimeout(() => {
-        document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+        const el = document.getElementById(location.hash.slice(1));
+        if (el) {
+          const navbarHeight = document.querySelector('nav')?.getBoundingClientRect().height || 0;
+          const y = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       }, 100);
     }
   }, [location.hash]);

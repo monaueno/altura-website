@@ -27,6 +27,7 @@ function PortfolioEditor({ formData, setFormData }) {
       name: '',
       logo: '',
       bgColor: '#f4efe4',
+      arrowColor: '#000000',
       logoHeight: '80',
       ads: [],
     };
@@ -60,18 +61,19 @@ function PortfolioEditor({ formData, setFormData }) {
     }));
   };
 
-  const addAd = (brandId) => {
+  const addAd = (brandId, type = 'static') => {
     updateBrands(brands.map(b => {
       if (b.id !== brandId) return b;
-      return { ...b, ads: [...(b.ads || []), ''] };
+      return { ...b, ads: [...(b.ads || []), { type, src: '', thumbnail: '' }] };
     }));
   };
 
-  const updateAd = (brandId, idx, value) => {
+  const updateAd = (brandId, idx, updates) => {
     updateBrands(brands.map(b => {
       if (b.id !== brandId) return b;
       const ads = [...b.ads];
-      ads[idx] = value;
+      const current = typeof ads[idx] === 'string' ? { type: 'static', src: ads[idx] } : ads[idx];
+      ads[idx] = { ...current, ...updates };
       return { ...b, ads };
     }));
   };
@@ -83,13 +85,16 @@ function PortfolioEditor({ formData, setFormData }) {
     }));
   };
 
-  const handleAdUpload = (brandId, idx, e) => {
+  const handleAdUpload = (brandId, idx, field, e) => {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (ev) => updateAd(brandId, idx, ev.target.result);
+    reader.onload = (ev) => updateAd(brandId, idx, { [field]: ev.target.result });
     reader.readAsDataURL(file);
   };
+
+  // Normalize ad to object format (backward compat)
+  const normalizeAd = (ad) => typeof ad === 'string' ? { type: 'static', src: ad } : ad;
 
   const handleLogoUpload = (brandId, e) => {
     const file = e.target.files[0];
@@ -148,6 +153,18 @@ function PortfolioEditor({ formData, setFormData }) {
             </div>
           </div>
           <div className="mb-5">
+            <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">Arrow Color</label>
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                value={editingBrand.arrowColor || '#000000'}
+                onChange={(e) => updateBrand(editingBrand.id, 'arrowColor', e.target.value)}
+                className="w-10 h-10 rounded border border-near-black/10 cursor-pointer"
+              />
+              <input type="text" value={editingBrand.arrowColor || '#000000'} onChange={(e) => updateBrand(editingBrand.id, 'arrowColor', e.target.value)} placeholder="#000000" className={inputClass} />
+            </div>
+          </div>
+          <div className="mb-5">
             <label className="block text-[0.85rem] font-medium text-near-black/70 mb-2.5">
               Logo Size — {editingBrand.logoScale || 50}%
             </label>
@@ -194,49 +211,90 @@ function PortfolioEditor({ formData, setFormData }) {
         {/* Ads */}
         <div className="bg-white border border-near-black/[0.04] rounded-lg p-7 mb-5 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-[0.9rem] font-semibold text-near-black">Ad Images</h3>
-            <button
-              onClick={() => addAd(editingBrand.id)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-[0.8rem] font-medium rounded-lg border border-near-black/[0.08] bg-transparent text-near-black/60 hover:text-near-black hover:border-near-black/20 cursor-pointer transition-all"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
-              Add Ad
-            </button>
+            <h3 className="text-[0.9rem] font-semibold text-near-black">Ads</h3>
+            <div className="flex gap-2">
+              <button
+                onClick={() => addAd(editingBrand.id, 'static')}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-[0.8rem] font-medium rounded-lg border border-near-black/[0.08] bg-transparent text-near-black/60 hover:text-near-black hover:border-near-black/20 cursor-pointer transition-all"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                Add Static Ad
+              </button>
+              <button
+                onClick={() => addAd(editingBrand.id, 'video')}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-[0.8rem] font-medium rounded-lg border border-near-black/[0.08] bg-transparent text-near-black/60 hover:text-near-black hover:border-near-black/20 cursor-pointer transition-all"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                Add Video Ad
+              </button>
+            </div>
           </div>
 
           <p className="text-[0.8rem] text-near-black/40 mb-4">
-            Each ad is one "page" — visitors swipe between them using dots.
+            Ads are shown 3 per slide. Static ads display as images, video ads show a play button overlay.
           </p>
 
           {(editingBrand.ads || []).length === 0 ? (
-            <p className="text-[0.85rem] text-near-black/40 text-center py-4">No ads yet. Click "Add Ad" to upload one.</p>
+            <p className="text-[0.85rem] text-near-black/40 text-center py-4">No ads yet. Add a static or video ad to get started.</p>
           ) : (
             <div className="space-y-4">
-              {editingBrand.ads.map((ad, idx) => (
-                <div key={idx} className="border border-near-black/[0.06] rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="text-[0.75rem] font-medium text-near-black/40 uppercase">Ad {idx + 1}</span>
-                    <button onClick={() => removeAd(editingBrand.id, idx)} className="text-[0.75rem] text-red-400 hover:text-red-600 bg-transparent border-none cursor-pointer">Remove</button>
-                  </div>
-
-                  <div className="relative border border-dashed border-near-black/[0.1] rounded-lg p-4 text-center cursor-pointer transition-all duration-150 hover:border-accent/60 hover:bg-accent/[0.03] bg-white group">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleAdUpload(editingBrand.id, idx, e)}
-                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                    />
-                    <div className="text-[0.85rem] text-near-black/60 font-medium">Click to upload image</div>
-                    <div className="text-[0.75rem] text-near-black/35 mt-1">JPG, PNG or WebP</div>
-                  </div>
-
-                  {ad && (
-                    <div className="mt-3 rounded-lg overflow-hidden border border-near-black/[0.04]">
-                      <img src={ad} alt={`Ad ${idx + 1}`} className="w-full max-h-[200px] object-contain bg-[#FAFAFA]" />
+              {editingBrand.ads.map((rawAd, idx) => {
+                const ad = normalizeAd(rawAd);
+                return (
+                  <div key={idx} className="border border-near-black/[0.06] rounded-lg p-4">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-[0.75rem] font-medium text-near-black/40 uppercase">
+                        {ad.type === 'video' ? '🎬 Video' : '🖼 Static'} Ad {idx + 1}
+                      </span>
+                      <button onClick={() => removeAd(editingBrand.id, idx)} className="text-[0.75rem] text-red-400 hover:text-red-600 bg-transparent border-none cursor-pointer">Remove</button>
                     </div>
-                  )}
-                </div>
-              ))}
+
+                    {/* Image/Thumbnail upload */}
+                    <div className="relative border border-dashed border-near-black/[0.1] rounded-lg p-4 text-center cursor-pointer transition-all duration-150 hover:border-accent/60 hover:bg-accent/[0.03] bg-white group">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleAdUpload(editingBrand.id, idx, ad.type === 'video' ? 'thumbnail' : 'src', e)}
+                        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      />
+                      <div className="text-[0.85rem] text-near-black/60 font-medium">
+                        {ad.type === 'video' ? 'Click to upload thumbnail image' : 'Click to upload image'}
+                      </div>
+                      <div className="text-[0.75rem] text-near-black/35 mt-1">JPG, PNG or WebP</div>
+                    </div>
+
+                    {/* Video file upload */}
+                    {ad.type === 'video' && (
+                      <div className="mt-3 relative border border-dashed border-near-black/[0.1] rounded-lg p-4 text-center cursor-pointer transition-all duration-150 hover:border-accent/60 hover:bg-accent/[0.03] bg-white group">
+                        <input
+                          type="file"
+                          accept="video/*"
+                          onChange={(e) => handleAdUpload(editingBrand.id, idx, 'src', e)}
+                          className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                        />
+                        <div className="text-[0.85rem] text-near-black/60 font-medium">Click to upload video file</div>
+                        <div className="text-[0.75rem] text-near-black/35 mt-1">MP4, MOV or WebM</div>
+                      </div>
+                    )}
+
+                    {/* Preview */}
+                    {(ad.src || ad.thumbnail) && (
+                      <div className="mt-3 rounded-lg overflow-hidden border border-near-black/[0.04] relative">
+                        <img src={ad.thumbnail || ad.src} alt={`Ad ${idx + 1}`} className="w-full max-h-[200px] object-contain bg-[#FAFAFA]" />
+                        {ad.type === 'video' && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-full bg-white/30 flex items-center justify-center">
+                              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

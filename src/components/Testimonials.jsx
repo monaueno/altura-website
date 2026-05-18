@@ -98,6 +98,7 @@ function Testimonials() {
           <button
             onClick={handlePrev}
             disabled={isFirst}
+            aria-label="Previous testimonial"
             className={`w-10 h-10 border-[1.5px] rounded-full cursor-pointer flex items-center justify-center transition-all ${
               isFirst
                 ? 'border-white/10 text-white/20 cursor-default'
@@ -111,6 +112,7 @@ function Testimonials() {
           <button
             onClick={handleNext}
             disabled={isLast}
+            aria-label="Next testimonial"
             className={`w-10 h-10 border-[1.5px] rounded-full cursor-pointer flex items-center justify-center transition-all ${
               isLast
                 ? 'border-white/10 text-white/20 cursor-default'

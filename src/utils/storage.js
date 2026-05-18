@@ -91,6 +91,7 @@ const defaultData = {
       name: "BoostedSafe",
       logo: "/assets/Porfolio/brand-logos/boostedsafe.png",
       bgColor: "#ffd608",
+      arrowColor: "#000000",
       logoScale: 70,
       ads: []
     },
@@ -100,6 +101,7 @@ const defaultData = {
       name: "Kaxi",
       logo: "/assets/Porfolio/brand-logos/kaxi.svg",
       bgColor: "#f4efe4",
+      arrowColor: "#000000",
       logoScale: 50,
       ads: []
     },
@@ -109,10 +111,11 @@ const defaultData = {
       name: "SALT",
       logo: "/assets/Porfolio/brand-logos/salt.png",
       bgColor: "#463d3a",
+      arrowColor: "#ffffff",
       logoScale: 55,
       ads: [
-        "/assets/Porfolio/Statics/Salt.jpeg",
-        "/assets/Porfolio/Statics/Ziplock-Organizer.jpg"
+        { type: "static", src: "/assets/Porfolio/Statics/Salt.jpeg" },
+        { type: "static", src: "/assets/Porfolio/Statics/Ziplock-Organizer.jpg" }
       ]
     },
     {
@@ -121,10 +124,11 @@ const defaultData = {
       name: "SoloPro Tax",
       logo: "/assets/Porfolio/brand-logos/solopro-tax.png",
       bgColor: "#1999a1",
+      arrowColor: "#ffffff",
       logoScale: 45,
       ads: [
-        "/assets/Porfolio/Statics/SoloPro-Tax.jpg",
-        "/assets/Porfolio/Statics/solopro-tax-second.jpg"
+        { type: "static", src: "/assets/Porfolio/Statics/SoloPro-Tax.jpg" },
+        { type: "static", src: "/assets/Porfolio/Statics/solopro-tax-second.jpg" }
       ]
     },
     {
@@ -133,6 +137,7 @@ const defaultData = {
       name: "Sunshine Buns",
       logo: "/assets/Porfolio/brand-logos/sunshine-buns.svg",
       bgColor: "#ffde8d",
+      arrowColor: "#000000",
       logoScale: 40,
       ads: []
     }
