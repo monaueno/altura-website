@@ -20,8 +20,7 @@ function ContactForm() {
     setStatus('sending');
 
     try {
-      // This will connect to the Twilio serverless function later
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://formspree.io/f/xvzyggde', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

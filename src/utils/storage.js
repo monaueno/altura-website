@@ -93,7 +93,9 @@ const defaultData = {
       bgColor: "#ffd608",
       arrowColor: "#000000",
       logoScale: 70,
-      ads: []
+      ads: [
+        // { type: }
+      ]
     },
     {
       id: "2",

@@ -132,19 +132,22 @@ On every route change, scroll position must reset to top — otherwise a fresh p
 
 ---
 
-## Contact Form → SMS Notification
-When Annalise's contact form is submitted, she receives a **text message** with the submission details.
+## Contact Form → Formspree
+When the contact form is submitted, Annalise receives an **email** with the submission details via Formspree.
 
-**Implementation**: Vercel Serverless Function + Twilio API
-- Create `/api/contact.js` as a Vercel serverless function
-- On form submit, POST to `/api/contact`
-- The function calls Twilio's API to text Annalise's phone number
-- Store all Twilio credentials as **Vercel environment variables** — never hardcode them:
-  - `TWILIO_ACCOUNT_SID`
-  - `TWILIO_AUTH_TOKEN`
-  - `TWILIO_FROM_NUMBER`
-  - `TWILIO_TO_NUMBER`
-- Cost: ~$0.0075 per text
+**Implementation**: Formspree (free tier)
+- Form submits a POST request to `https://formspree.io/f/YOUR_FORM_ID`
+- Fields sent: `name`, `email`, `message`
+- No backend code needed — Formspree handles delivery
+- Free tier: 50 submissions/month
+- Formspree dashboard at formspree.io provides spam filtering, submission history, and email notifications
+
+**Setup steps (for Annalise/developer)**:
+1. Go to https://formspree.io and create a free account
+2. Click "New Form", name it (e.g. "Altura Contact"), and set the notification email to Annalise's email
+3. Copy the form endpoint ID (the part after `/f/`, e.g. `xyzabcde`)
+4. Replace `YOUR_FORM_ID` in `src/components/ContactForm.jsx` with the real ID
+5. Test by submitting the form — Annalise should receive an email
 
 ---
 
