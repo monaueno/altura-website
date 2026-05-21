@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getData } from '../utils/storage';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -8,6 +8,24 @@ function Portfolio() {
   const [heroData, setHeroData] = useState({});
   const [expandedId, setExpandedId] = useState(null);
   const [currentAd, setCurrentAd] = useState(0);
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [hoveredAd, setHoveredAd] = useState(null);
+  const videoRefs = useRef({});
+
+  const handleMouseEnter = (key) => {
+    setHoveredAd(key);
+    const video = videoRefs.current[key];
+    if (video) video.play().catch(() => {});
+  };
+
+  const handleMouseLeave = (key) => {
+    setHoveredAd(null);
+    const video = videoRefs.current[key];
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  };
 
   useEffect(() => {
     const siteData = getData();
@@ -68,11 +86,10 @@ function Portfolio() {
               <div
                 className="overflow-hidden transition-all duration-700 ease-in-out"
                 style={{
-                  maxHeight: isExpanded ? 'calc(90vh - calc(100vw / 10))' : '0px',
-                  opacity: isExpanded ? 1 : 0,
+                  maxHeight: isExpanded ? 'calc(75vh - calc(100vw / 10))' : '0px',
                 }}
               >
-                <div className="h-full flex flex-col items-center justify-center px-6 py-6" style={{ backgroundColor: brand.bgColor }}>
+                <div className="h-full flex flex-col items-center justify-center px-6 pt-6 pb-12" style={{ backgroundColor: brand.bgColor }}>
                   <div className="max-w-7xl w-full h-full flex flex-col">
                     {ads.length === 0 ? (
                       <p className="text-center text-near-black/50 font-subheading text-[1rem] py-8">
@@ -85,7 +102,7 @@ function Portfolio() {
                       const arrowColor = brand.arrowColor || '#000000';
                       return (
                         <>
-                          <div className="flex items-center justify-center gap-4 mb-6 flex-1 min-h-0">
+                          <div className="flex items-center gap-4 mb-6 flex-1 min-h-0">
                             {/* Left Arrow */}
                             <button
                               onClick={() => setCurrentAd(prev => Math.max(0, prev - 1))}
@@ -100,32 +117,48 @@ function Portfolio() {
                             </button>
 
                             <div className="flex items-center justify-center gap-8 flex-1 min-h-0">
-                            {slideAds.map((ad, idx) => (
-                              <div key={currentAd * adsPerSlide + idx} className="relative group">
-                                {ad.type === 'video' ? (
-                                  <>
-                                    <img
-                                      src={ad.thumbnail || ad.src}
-                                      alt={`${brand.name} ad ${currentAd * adsPerSlide + idx + 1}`}
-                                      className="max-h-[500px] object-contain"
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors backdrop-blur-sm">
-                                        <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                          <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                      </div>
-                                    </div>
-                                  </>
-                                ) : (
-                                  <img
-                                    src={ad.src}
-                                    alt={`${brand.name} ad ${currentAd * adsPerSlide + idx + 1}`}
-                                    className="max-h-[500px] object-contain"
-                                  />
-                                )}
-                              </div>
-                            ))}
+                              {slideAds.map((ad, idx) => {
+                                const adKey = `${brand.id}-${currentAd}-${idx}`;
+                                return (
+                                  <div
+                                    key={adKey}
+                                    className="relative group cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg overflow-hidden"
+                                    onMouseEnter={() => ad.type === 'video' && handleMouseEnter(adKey)}
+                                    onMouseLeave={() => ad.type === 'video' && handleMouseLeave(adKey)}
+                                    onClick={() => ad.type === 'video' && setActiveVideo(ad)}
+                                  >
+                                    {ad.type === 'video' ? (
+                                      <>
+                                        <video
+                                          ref={(el) => { videoRefs.current[adKey] = el; }}
+                                          src={ad.src}
+                                          muted
+                                          playsInline
+                                          loop
+                                          preload="metadata"
+                                          className="max-h-[450px] object-contain"
+                                        />
+                                        {/* Dark overlay — fades on hover */}
+                                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-300" />
+                                        {/* Play button — fades on hover */}
+                                        <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
+                                          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                                            <svg className="w-7 h-7 text-near-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                              <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                          </div>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <img
+                                        src={ad.src}
+                                        alt={`${brand.name} ad ${currentAd * adsPerSlide + idx + 1}`}
+                                        className="max-h-[450px] object-contain"
+                                      />
+                                    )}
+                                  </div>
+                                );
+                              })}
                             </div>
 
                             {/* Right Arrow */}
@@ -179,6 +212,35 @@ function Portfolio() {
       </section>
 
       <Footer />
+
+      {/* Video Modal */}
+      {activeVideo && (
+        <div
+          className="fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4"
+          onClick={() => setActiveVideo(null)}
+        >
+          <button
+            onClick={() => setActiveVideo(null)}
+            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-[1000] border-none cursor-pointer"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div
+            className="relative max-w-4xl w-full aspect-[4/5] md:aspect-video"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video
+              src={activeVideo.src}
+              controls
+              autoPlay
+              className="w-full h-full rounded-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

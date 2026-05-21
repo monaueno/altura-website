@@ -94,7 +94,9 @@ const defaultData = {
       arrowColor: "#000000",
       logoScale: 70,
       ads: [
-        // { type: }
+        { type: "static", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/4-Reviews_9x16 copy.jpg" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/BS_EvolutionReel copy.mov"},
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/IsoFix_Callout_v3_9x16 copy.mp4"}
       ]
     },
     {
