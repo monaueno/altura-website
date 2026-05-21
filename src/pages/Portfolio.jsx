@@ -116,49 +116,60 @@ function Portfolio() {
                               </svg>
                             </button>
 
-                            <div className="flex items-center justify-center gap-8 flex-1 min-h-0">
-                              {slideAds.map((ad, idx) => {
-                                const adKey = `${brand.id}-${currentAd}-${idx}`;
-                                return (
-                                  <div
-                                    key={adKey}
-                                    className="relative group cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg overflow-hidden"
-                                    onMouseEnter={() => ad.type === 'video' && handleMouseEnter(adKey)}
-                                    onMouseLeave={() => ad.type === 'video' && handleMouseLeave(adKey)}
-                                    onClick={() => ad.type === 'video' && setActiveVideo(ad)}
-                                  >
-                                    {ad.type === 'video' ? (
-                                      <>
-                                        <video
-                                          ref={(el) => { videoRefs.current[adKey] = el; }}
-                                          src={ad.src}
-                                          muted
-                                          playsInline
-                                          loop
-                                          preload="metadata"
-                                          className="max-h-[450px] object-contain"
-                                        />
-                                        {/* Dark overlay — fades on hover */}
-                                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-300" />
-                                        {/* Play button — fades on hover */}
-                                        <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-                                          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                                            <svg className="w-7 h-7 text-near-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                              <path d="M8 5v14l11-7z" />
-                                            </svg>
+                            <div className="flex-1 min-h-0 overflow-hidden">
+                              <div
+                                className="flex transition-transform duration-500 ease-in-out h-full"
+                                style={{ transform: `translateX(-${currentAd * 100}%)` }}
+                              >
+                                {/* Each slide is a full-width group of up to 3 ads */}
+                                {Array.from({ length: totalSlides }, (_, slideIdx) => {
+                                  const slideItems = ads.slice(slideIdx * adsPerSlide, slideIdx * adsPerSlide + adsPerSlide);
+                                  return (
+                                    <div key={slideIdx} className="flex items-center justify-center gap-8 min-w-full">
+                                      {slideItems.map((ad, idx) => {
+                                        const adKey = `${brand.id}-${slideIdx}-${idx}`;
+                                        return (
+                                          <div
+                                            key={adKey}
+                                            className="relative group cursor-pointer transition-transform duration-300 hover:scale-105 rounded-lg overflow-hidden"
+                                            onMouseEnter={() => ad.type === 'video' && handleMouseEnter(adKey)}
+                                            onMouseLeave={() => ad.type === 'video' && handleMouseLeave(adKey)}
+                                            onClick={() => ad.type === 'video' && setActiveVideo(ad)}
+                                          >
+                                            {ad.type === 'video' ? (
+                                              <>
+                                                <video
+                                                  ref={(el) => { videoRefs.current[adKey] = el; }}
+                                                  src={ad.src}
+                                                  muted
+                                                  playsInline
+                                                  loop
+                                                  preload="metadata"
+                                                  className="max-h-[450px] object-contain"
+                                                />
+                                                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-300" />
+                                                <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
+                                                  <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                                                    <svg className="w-7 h-7 text-near-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                      <path d="M8 5v14l11-7z" />
+                                                    </svg>
+                                                  </div>
+                                                </div>
+                                              </>
+                                            ) : (
+                                              <img
+                                                src={ad.src}
+                                                alt={`${brand.name} ad ${slideIdx * adsPerSlide + idx + 1}`}
+                                                className="max-h-[450px] object-contain"
+                                              />
+                                            )}
                                           </div>
-                                        </div>
-                                      </>
-                                    ) : (
-                                      <img
-                                        src={ad.src}
-                                        alt={`${brand.name} ad ${currentAd * adsPerSlide + idx + 1}`}
-                                        className="max-h-[450px] object-contain"
-                                      />
-                                    )}
-                                  </div>
-                                );
-                              })}
+                                        );
+                                      })}
+                                    </div>
+                                  );
+                                })}
+                              </div>
                             </div>
 
                             {/* Right Arrow */}

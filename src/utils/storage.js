@@ -95,8 +95,8 @@ const defaultData = {
       logoScale: 70,
       ads: [
         { type: "static", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/4-Reviews_9x16 copy.jpg" },
-        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/BS_EvolutionReel copy.mov"},
-        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/IsoFix_Callout_v3_9x16 copy.mp4"}
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/BS_EvolutionReel copy.mov" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/BoostedSafe/IsoFix_Callout_v3_9x16 copy.mp4" }
       ]
     },
     {
@@ -107,7 +107,15 @@ const defaultData = {
       bgColor: "#f4efe4",
       arrowColor: "#000000",
       logoScale: 50,
-      ads: []
+      ads: [
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/BoyMom_9x16 copy.mp4" },
+        { type: "static", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/FavoritesFolder_9x16 copy.png" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/MotherhoodCollection_9x16_1 copy.mp4" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/Polaroid_9x16 copy.mp4" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/ScrapbookLetters_4x5_1.mp4" },
+        { type: "static", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/SplitReview_9x16 copy.jpg" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Kaxi/TheViralClawClip_v1_9x16.mp4" }
+      ]
     },
     {
       id: "3",
@@ -118,8 +126,9 @@ const defaultData = {
       arrowColor: "#ffffff",
       logoScale: 55,
       ads: [
-        { type: "static", src: "/assets/Porfolio/Statics/Salt.jpeg" },
-        { type: "static", src: "/assets/Porfolio/Statics/Ziplock-Organizer.jpg" }
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Salt by Sabrina/AdjustableDivider_9x16 copy.mp4" },
+        { type: "static", src: "/assets/Porfolio/Portfolio Section for Web/Salt by Sabrina/DesignedtoFit_Iteration_9x16 copy.png" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Salt by Sabrina/SilverwareDrawer_9x16 copy.mp4" }
       ]
     },
     {
@@ -131,8 +140,10 @@ const defaultData = {
       arrowColor: "#ffffff",
       logoScale: 45,
       ads: [
-        { type: "static", src: "/assets/Porfolio/Statics/SoloPro-Tax.jpg" },
-        { type: "static", src: "/assets/Porfolio/Statics/solopro-tax-second.jpg" }
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/SoloPro/BandAid_Ad_9x16 copy.mp4" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/SoloPro/NotesApp_MotionGraphic-9x16_v2_EO copy.mp4" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/SoloPro/Split_9x16 copy.mp4"},
+        { type: "static", src: "/assets/Porfolio/Portfolio Section for Web/SoloPro/StickyNote_9x16 copy.png"}
       ]
     },
     {
@@ -143,7 +154,12 @@ const defaultData = {
       bgColor: "#ffde8d",
       arrowColor: "#000000",
       logoScale: 40,
-      ads: []
+      ads: [
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Sunshine Buns/ClickVideo_v1_EO.mp4" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Sunshine Buns/Hypnosis_Reel_9x16 copy.mp4" }, 
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Sunshine Buns/Nationwide_MotionGraphic_9x16 copy.mp4" },
+        { type: "video", src: "/assets/Porfolio/Portfolio Section for Web/Sunshine Buns/PressMention-Reel_1 copy.mp4" }
+      ]
     }
   ],
   blog: [
