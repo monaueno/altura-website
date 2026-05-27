@@ -104,17 +104,19 @@ function Portfolio() {
                         <>
                           <div className="flex items-center gap-4 mb-6 flex-1 min-h-0">
                             {/* Left Arrow */}
-                            <button
-                              onClick={() => setCurrentAd(prev => Math.max(0, prev - 1))}
-                              disabled={currentAd === 0}
-                              className="shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center cursor-pointer bg-transparent transition-opacity disabled:opacity-20"
-                              style={{ borderColor: arrowColor }}
-                              aria-label="Previous slide"
-                            >
-                              <svg className="w-5 h-5" fill="none" stroke={arrowColor} strokeWidth={2.5} viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                              </svg>
-                            </button>
+                            {totalSlides > 1 && (
+                              <button
+                                onClick={() => setCurrentAd(prev => Math.max(0, prev - 1))}
+                                disabled={currentAd === 0}
+                                className="shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center cursor-pointer bg-transparent transition-opacity disabled:opacity-20"
+                                style={{ borderColor: arrowColor }}
+                                aria-label="Previous slide"
+                              >
+                                <svg className="w-5 h-5" fill="none" stroke={arrowColor} strokeWidth={2.5} viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                              </button>
+                            )}
 
                             <div className="flex-1 min-h-0 overflow-hidden">
                               <div
@@ -148,9 +150,9 @@ function Portfolio() {
                                                   className="max-h-[450px] object-contain"
                                                 />
                                                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-300" />
-                                                <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-                                                  <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                                                    <svg className="w-7 h-7 text-near-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <div className="absolute bottom-3 right-3 transition-opacity duration-300 group-hover:opacity-0">
+                                                  <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center">
+                                                    <svg className="w-4 h-4 text-near-black ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                                       <path d="M8 5v14l11-7z" />
                                                     </svg>
                                                   </div>
@@ -173,6 +175,7 @@ function Portfolio() {
                             </div>
 
                             {/* Right Arrow */}
+                            {totalSlides > 1 && (
                             <button
                               onClick={() => setCurrentAd(prev => Math.min(totalSlides - 1, prev + 1))}
                               disabled={currentAd === totalSlides - 1}
@@ -184,6 +187,7 @@ function Portfolio() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                               </svg>
                             </button>
+                            )}
                           </div>
 
                           {/* Dot Navigation — always reserves space for consistent height */}

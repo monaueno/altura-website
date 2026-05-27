@@ -60,7 +60,7 @@ function ServicesPreview() {
                 {service.description}
               </p>
               <a
-                href={`/services#service-${service.id}`}
+                href={`/services`}
                 className="inline-block px-6 py-2 border-2 border-near-black bg-transparent text-near-black font-display font-bold text-[16px] tracking-[0.05em] uppercase transition-colors hover:bg-near-black hover:text-white"
               >
                 Learn More

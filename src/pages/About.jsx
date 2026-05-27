@@ -44,7 +44,11 @@ function About() {
 
   const scrollToContent = () => {
     const aboutSection = document.getElementById('about-content');
-    if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
+    if (aboutSection) {
+      const navbarHeight = document.querySelector('nav')?.getBoundingClientRect().height || 0;
+      const y = aboutSection.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -154,7 +158,7 @@ function About() {
             {data.home?.aboutCTA || 'Ready to take your business to new heights?'}
           </h2>
           <Link
-            to="/services"
+            to="/services#contact"
             className="inline-block mt-10 bg-white text-near-black font-display font-bold text-[20px] tracking-[0.05em] uppercase px-6 py-3 hover:bg-accent-light transition-colors"
           >
             Hire Us!

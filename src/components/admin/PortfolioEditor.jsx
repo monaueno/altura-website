@@ -85,6 +85,16 @@ function PortfolioEditor({ formData, setFormData }) {
     }));
   };
 
+  const moveAd = (brandId, fromIdx, toIdx) => {
+    updateBrands(brands.map(b => {
+      if (b.id !== brandId) return b;
+      const ads = [...b.ads];
+      const [moved] = ads.splice(fromIdx, 1);
+      ads.splice(toIdx, 0, moved);
+      return { ...b, ads };
+    }));
+  };
+
   const handleAdUpload = (brandId, idx, field, e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -243,9 +253,29 @@ function PortfolioEditor({ formData, setFormData }) {
                 return (
                   <div key={idx} className="border border-near-black/[0.06] rounded-lg p-4">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-[0.75rem] font-medium text-near-black/40 uppercase">
-                        {ad.type === 'video' ? '🎬 Video' : '🖼 Static'} Ad {idx + 1}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[0.75rem] font-medium text-near-black/40 uppercase">
+                          {ad.type === 'video' ? '🎬 Video' : '🖼 Static'} Ad {idx + 1}
+                        </span>
+                        <div className="flex gap-1">
+                          <button
+                            onClick={() => moveAd(editingBrand.id, idx, idx - 1)}
+                            disabled={idx === 0}
+                            className="w-6 h-6 flex items-center justify-center rounded border border-near-black/[0.08] bg-transparent text-near-black/40 hover:text-near-black hover:border-near-black/20 cursor-pointer transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                            aria-label="Move up"
+                          >
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
+                          </button>
+                          <button
+                            onClick={() => moveAd(editingBrand.id, idx, idx + 1)}
+                            disabled={idx === editingBrand.ads.length - 1}
+                            className="w-6 h-6 flex items-center justify-center rounded border border-near-black/[0.08] bg-transparent text-near-black/40 hover:text-near-black hover:border-near-black/20 cursor-pointer transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+                            aria-label="Move down"
+                          >
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                          </button>
+                        </div>
+                      </div>
                       <button onClick={() => removeAd(editingBrand.id, idx)} className="text-[0.75rem] text-red-400 hover:text-red-600 bg-transparent border-none cursor-pointer">Remove</button>
                     </div>
 

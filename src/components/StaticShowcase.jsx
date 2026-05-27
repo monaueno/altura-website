@@ -85,11 +85,11 @@ function StaticShowcase() {
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-300" />
 
-              {/* Play Button */}
-              <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-                <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center transition-all">
+              {/* Play Button — bottom right */}
+              <div className="absolute bottom-3 right-3 transition-opacity duration-300 group-hover:opacity-0">
+                <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center">
                   <svg
-                    className="w-7 h-7 text-near-black ml-1"
+                    className="w-4 h-4 text-near-black ml-0.5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >

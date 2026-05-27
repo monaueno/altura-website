@@ -65,9 +65,9 @@ function Services() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await fetch('/api/contact', {
+      await fetch('https://formspree.io/f/xvzyggde', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(formData),
       });
       setSubmitted(true);
